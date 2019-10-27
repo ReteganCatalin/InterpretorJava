@@ -22,7 +22,7 @@ public class VarDeclStmt implements IStmt
 
     @Override
     public String toString() {
-        return typ + " " + name +":";
+        return typ + " " + name +";";
 
     }
 

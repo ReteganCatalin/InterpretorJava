@@ -32,24 +32,67 @@ public class Main
         MyIStack<IStmt> statements = new MyStack<IStmt>();
         MyIDictionary<String, Value> symTable= new MyDictionary<String,Value>();
         MyIList<Value> out=new MyList<Value>();
+        System.out.println("Choose your program 1,2,3:");
+        Scanner input= new Scanner(System.in);
+        int input_program=0;
 
-        statements.push(ChooseProgram(1));
+        try {
+            input_program = input.nextInt();
+            if (input_program <= 0 && input_program > 3) {
+                throw new Exception("esd");
+            }
+        } catch (Exception e) {
+                System.out.println("Not a valid input");
+                return;
+        }
+
+        statements.push(ChooseProgram(input_program));
         ProgramState state=new ProgramState(statements,symTable,out);
         Repository repo=new ProgramRepo(state);
         ProgramController ctrl=new ProgramController(repo);
-        try
+        while(true)
         {
-            ArrayList<String> To_print=ctrl.allStep();
-            for(String item: To_print)
+            System.out.println("1-One step verification");
+            System.out.println("2-All step verification");
+            System.out.println("3-Exit");
+            try {
+                input_program = input.nextInt();
+                if (input_program <= 0 && input_program > 3) {
+                    throw new Exception("lolo");
+                }
+            } catch (Exception e) {
+                System.out.println("Not a valid input");
+                return;
+            }
+            if(input_program==2) {
+                try {
+                    ArrayList<String> To_print = ctrl.allStep();
+                    for (String item : To_print) {
+                        System.out.println(item);
+                    }
+
+                } catch (MyExceptions exceptions) {
+                    System.out.println(exceptions.getMessage());
+
+                }
+            }
+            else if(input_program==3)
             {
-                System.out.println(item);
+                return;
+            }
+            else if(input_program==1) {
+                try {
+                    String print_step = ctrl.WrapperOneStep();
+                    System.out.println(print_step);
+                }
+                catch(MyExceptions exception)
+                {
+                    System.out.println(exception.getMessage());
+                }
             }
 
         }
-        catch(MyExceptions exceptions)
-        {
 
-        }
 
     }
 
@@ -63,7 +106,7 @@ public class Main
         else if (input_program==2)
         {
             IStmt ex2 = new CompStmt( new VarDeclStmt("a",new IntType()),
-                    new CompStmt(new VarDeclStmt("b",new IntType()),new CompStmt(new AssignStmt("a", new ArithExp('+',new ValueExp(new IntValue(2))
+                    new CompStmt(new VarDeclStmt("b",new IntType()),new CompStmt(new AssignStmt("a", new ArithExp(1,new ValueExp(new IntValue(2))
                             ,new ArithExp(3,new ValueExp(new IntValue(3)), new ValueExp(new IntValue(5))))),  new CompStmt(new AssignStmt("b",new ArithExp(1,new VarExp("a"),
                             new ValueExp(new IntValue(1)))), new PrintStmt(new VarExp("b"))))));
             return ex2;

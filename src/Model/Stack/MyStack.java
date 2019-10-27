@@ -38,8 +38,8 @@ public class MyStack<T> implements  MyIStack<T>{
         StringBuilder content = new StringBuilder();
 
         for (T item: stack) {
-            content.append(item).append("|");
-        }
+            content.insert(0,"|").insert(0,item);
+    }
         return content.toString();
     }
 }

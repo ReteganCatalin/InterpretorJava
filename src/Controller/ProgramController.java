@@ -23,11 +23,29 @@ public class ProgramController {
         return crtStmt.execute(state);
     }
 
+    public String WrapperOneStep() throws  MyExceptions
+    {
+
+        ProgramState prg = repo.getCurrentProgram();
+        if(!prg.getStack().isEmpty())
+        {
+            oneStep(prg);
+            return prg.toString();
+        }
+        throw new MyExceptions("The Stack is Empty");
+    }
+
     public ArrayList<String> allStep() throws MyExceptions
     {
         ArrayList<String> states=new ArrayList<String>() ;
         ProgramState prg = repo.getCurrentProgram();
+        if(prg.getStack().isEmpty())
+        {
+            throw new MyExceptions("The Stack is Empty the program is done");
+
+        }
         states.add(prg.toString());
+
         while (!prg.getStack().isEmpty())
         {
             oneStep(prg);//here you can display the prg state

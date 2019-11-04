@@ -38,7 +38,7 @@ public class MyStack<T> implements  MyIStack<T>{
         StringBuilder content = new StringBuilder();
 
         for (T item: stack) {
-            content.insert(0,"|").insert(0,item);
+            content.insert(0,"\n").insert(0,item);
     }
         return content.toString();
     }

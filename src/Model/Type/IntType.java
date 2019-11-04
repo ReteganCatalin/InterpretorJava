@@ -1,5 +1,8 @@
 package Model.Type;
 
+import Model.Value.IntValue;
+import Model.Value.Value;
+
 public class IntType implements  Type {
     public IntType() {
     }
@@ -9,6 +12,11 @@ public class IntType implements  Type {
             return true;
         else
             return false;
+    }
+
+    public Value defaultValue()
+    {
+        return new IntValue(0);
     }
     public String toString()
     {

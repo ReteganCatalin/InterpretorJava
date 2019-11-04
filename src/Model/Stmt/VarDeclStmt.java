@@ -4,9 +4,11 @@ import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
 import Model.ProgramState;
 import Model.Type.BoolType;
+import Model.Type.IntType;
 import Model.Type.Type;
 import Model.Value.BoolValue;
 import Model.Value.IntValue;
+import Model.Value.StringValue;
 import Model.Value.Value;
 
 public class VarDeclStmt implements IStmt
@@ -35,15 +37,19 @@ public class VarDeclStmt implements IStmt
         }
         else
         {
-            if(typ instanceof BoolType)
+            if(typ.equals(new BoolType())==true)
             {
-                BoolValue bool=new BoolValue(false);
+                BoolValue bool=(BoolValue) typ.defaultValue();
                 symTbl.update(name,bool);
+            }
+            else if(typ.equals(new IntType())==true) {
+                IntValue inter = (IntValue) typ.defaultValue();
+                symTbl.update(name, inter);
             }
             else
             {
-                IntValue inter=new IntValue(0);
-                symTbl.update(name,inter);
+                StringValue string = (StringValue) typ.defaultValue();
+                symTbl.update(name, string);
             }
 
         }

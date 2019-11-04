@@ -5,7 +5,7 @@ import Exceptions.MyExceptions;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class MyDictionary<K,V> implements  MyIDictionary<K,V> {
+public class FileTable<K,V> implements  MyIDictionary<K,V> {
     HashMap<K,V> dictionary;
     public V lookup(K key) throws MyExceptions
     {
@@ -19,29 +19,30 @@ public class MyDictionary<K,V> implements  MyIDictionary<K,V> {
     }
     public void update(K key, V value)
     {
-        dictionary.put(key,value);
+        if(this.isDefined(key)==false) {
+            dictionary.put(key, value);
+        }
+        else
+        {
+            dictionary.remove(key);
+        }
     }
     public boolean isDefined(K key)
     {
         return dictionary.containsKey(key);
     }
 
-    public MyDictionary() {
+    public FileTable() {
         this.dictionary = new HashMap<K,V>();
     }
 
-    @Override
     public String toString() {
         StringBuilder content = new StringBuilder();
         Iterator<HashMap.Entry<K, V>> it = dictionary.entrySet().iterator();
 
         while (it.hasNext()) {
             HashMap.Entry<K, V> entry = it.next();
-            content.append("(")
-                    .append(entry.getKey())
-                    .append("=")
-                    .append(entry.getValue())
-                    .append(")")
+            content.append(entry.getKey())
                     .append("\n");
         }
         return content.toString();

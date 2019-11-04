@@ -1,7 +1,6 @@
 package Model.List;
 
 import Exceptions.MyExceptions;
-import Model.Exp.Exp;
 
 import java.util.ArrayList;
 
@@ -48,7 +47,7 @@ public class MyList<T> implements  MyIList<T> {
     public String toString() {
         StringBuilder content = new StringBuilder();
         for (T item: vector) {
-            content.append(item).append(",");
+            content.append(item).append("\n");
         }
         return content.toString();
     }

@@ -12,4 +12,9 @@ public class NopStmt implements IStmt {
         }
         return state;
     }
+
+    @Override
+    public String toString() {
+        return "";
+    }
 }

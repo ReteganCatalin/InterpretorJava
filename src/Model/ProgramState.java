@@ -1,15 +1,23 @@
 package Model;
+
+import Model.Dict.FileTable;
+import Model.Dict.MyDictionary;
 import Model.Dict.MyIDictionary;
 import Model.List.MyIList;
+import Model.List.MyList;
 import Model.Stack.MyIStack;
 import Model.Stack.MyStack;
 import Model.Stmt.IStmt;
 import Model.Value.Value;
 
+import java.io.BufferedReader;
+
 public class ProgramState {
     MyIStack<IStmt> statements;
     MyIDictionary<String, Value> symTable;
     MyIList<Value> out;
+    MyIDictionary<String, BufferedReader> fileTable;
+    IStmt originalProgram;
 
     public MyIStack<IStmt> getStack()
     {
@@ -18,10 +26,15 @@ public class ProgramState {
     public MyIList<Value> getOutput() { return out; }
     public MyIDictionary<String,Value> getSymTable() {return symTable;}
 
-    public ProgramState(MyIStack<IStmt> statements, MyIDictionary<String, Value> symTable, MyIList<Value> out) {
-        this.statements = statements;
-        this.symTable = symTable;
-        this.out = out;
+    public ProgramState(IStmt statement) {
+        this.statements = new MyStack<IStmt>();
+        this.symTable = new MyDictionary<String, Value>();
+        this.out = new MyList<Value>();
+        this.fileTable=new FileTable<String,BufferedReader>();
+        originalProgram=statement;
+        statements.push(statement);
+
+
     }
 
     public void setStatements(MyIStack<IStmt> statements) {
@@ -36,13 +49,22 @@ public class ProgramState {
         this.out = out;
     }
 
+    public MyIDictionary<String, BufferedReader> getFileTable() {
+        return fileTable;
+    }
+
+    public void setFileTable(MyIDictionary<String, BufferedReader> fileTable) {
+        this.fileTable = fileTable;
+    }
+
     @Override
     public String toString() {
         return "ProgramState:" +
                 "\n" +
-                "ExeStack:" + statements +"\n"+
-                "SymTable:" + symTable + "\n" +
-                "Out:" + out +"\n";
+                "ExeStack:\n" + statements +"\n"+
+                "SymTable:\n" + symTable + "\n" +
+                "Out:\n" + out +"\n"+
+                "FileTable:\n" + fileTable +"\n";
     }
 
     public ProgramState GetCurrentState()

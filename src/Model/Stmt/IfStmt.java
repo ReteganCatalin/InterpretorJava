@@ -5,6 +5,7 @@ import Model.Dict.MyIDictionary;
 import Model.Exp.Exp;
 import Model.ProgramState;
 import Model.Stack.MyIStack;
+import Model.Type.BoolType;
 import Model.Value.BoolValue;
 import Model.Value.Value;
 
@@ -27,7 +28,7 @@ public class IfStmt implements IStmt{
         MyIStack<IStmt> stack=state.getStack();
         MyIDictionary<String, Value> symTbl = state.getSymTable();
         Value Cond=exp.eval(symTbl);
-        if(Cond.getType() instanceof BoolValue)
+        if(Cond.getType().equals(new BoolType())==false)
         {
             throw new MyExceptions("No a boolean condition");
         }

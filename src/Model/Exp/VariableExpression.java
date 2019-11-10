@@ -7,9 +7,9 @@ import Model.Value.Value;
 public class VariableExpression implements Expression
 {
     String id;
-    public Value eval(MyIDictionary<String,Value> tbl) throws MyExceptions
+    public Value eval(MyIDictionary<String, Value> symbolTable, MyIDictionary<Integer, Value> Heap) throws MyExceptions
     {
-        return tbl.lookup(id);
+        return symbolTable.lookup(id);
     }
 
     public VariableExpression(String id) {

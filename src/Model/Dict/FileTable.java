@@ -47,4 +47,11 @@ public class FileTable<K,V> implements  MyIDictionary<K,V> {
         }
         return content.toString();
     }
+    public void setValues(HashMap<K,V> new_values)
+    {
+        this.dictionary=new_values;
+    }
+    public HashMap<K, V> getValues() {
+        return dictionary;
+    }
 }

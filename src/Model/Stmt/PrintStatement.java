@@ -23,8 +23,8 @@ public class PrintStatement implements IStatement
     public ProgramState execute(ProgramState state) throws MyExceptions
     {
         MyIList<Value> out=state.getOutput();
-        MyIDictionary<String,Value>  symTable=state.getSymTable();
-        out.add(expression.eval(symTable));
+        MyIDictionary<String,Value>  symTable=state.getSymbolsTable();
+        out.add(expression.eval(symTable,state.getHeapTable() ));
         return state;
     }
 }

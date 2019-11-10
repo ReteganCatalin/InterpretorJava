@@ -22,11 +22,11 @@ public class ArithmeticExpression implements Expression {
     // override
 
 
-    public Value eval(MyIDictionary<String, Value> tbl) throws MyExceptions {
+    public Value eval(MyIDictionary<String, Value> symbolTable, MyIDictionary<Integer, Value> Heap) throws MyExceptions {
         Value v1, v2;
-        v1 = first_expression.eval(tbl);
+        v1 = first_expression.eval(symbolTable,Heap);
         if (v1.getType().equals(new IntType())) {
-            v2 = second_expression.eval(tbl);
+            v2 = second_expression.eval(symbolTable,Heap );
             if (v2.getType().equals(new IntType())) {
                 IntValue i1 = (IntValue) v1;
                 IntValue i2 = (IntValue) v2;

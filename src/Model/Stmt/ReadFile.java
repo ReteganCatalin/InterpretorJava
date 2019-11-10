@@ -21,11 +21,12 @@ public class ReadFile implements IStatement {
     }
     public ProgramState execute(ProgramState state) throws MyExceptions {
         MyIDictionary<String, BufferedReader> fileTable = state.getFileTable();
-        MyIDictionary<String, Value> symTbl = state.getSymTable();
+        MyIDictionary<String, Value> symTbl = state.getSymbolsTable();
+        MyIDictionary<Integer, Value> heap = state.getHeapTable();
         symTbl.lookup(val.toString());
-        if (expression.eval(symTbl).getType().equals(new StringType()))
+        if (expression.eval(symTbl,heap ).getType().equals(new StringType()))
         {
-            StringValue file_name=(StringValue) expression.eval(symTbl);
+            StringValue file_name=(StringValue) expression.eval(symTbl,heap );
 
             if(fileTable.isDefined(file_name.getValue())==false){
                 throw new MyExceptions("No file found!");

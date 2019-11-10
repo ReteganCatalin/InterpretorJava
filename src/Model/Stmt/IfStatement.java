@@ -26,8 +26,9 @@ public class IfStatement implements IStatement {
     public ProgramState execute(ProgramState state) throws MyExceptions
     {
         MyIStack<IStatement> stack=state.getStack();
-        MyIDictionary<String, Value> symTbl = state.getSymTable();
-        Value Cond= expression.eval(symTbl);
+        MyIDictionary<String, Value> symTbl = state.getSymbolsTable();
+        MyIDictionary<Integer, Value> heap = state.getHeapTable();
+        Value Cond= expression.eval(symTbl,heap );
         if(Cond.getType().equals(new BoolType())==false)
         {
             throw new MyExceptions("No a boolean condition");

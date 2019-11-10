@@ -4,13 +4,21 @@ import Exceptions.MyExceptions;
 import Model.ProgramState;
 import Model.Stack.MyIStack;
 import Model.Stmt.IStatement;
+import Model.Value.ReferenceValue;
+import Model.Value.Value;
 import Repository.Repository;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ProgramController {
     Repository repo;
+    Map<Integer, Value> unsafeGarbageCollector(List<Integer> symTableAddr, Map<Integer,Value> heap)
+    {return heap.entrySet().stream().filter(e->symTableAddr.contains(e.getKey())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));}
+    List<Integer> getAddrFromSymTable(Collection<Value> symTableValues){
+        return symTableValues.stream().filter(v-> v instanceof ReferenceValue)
+                .map(v-> {ReferenceValue v1 = (ReferenceValue)v; return v1.getAddress();}).collect(Collectors.toList());}
+
     public ProgramState oneStep(ProgramState state) throws MyExceptions {
         MyIStack<IStatement> stk=state.getStack();
         if(stk.isEmpty())
@@ -18,11 +26,8 @@ public class ProgramController {
             throw new MyExceptions("Stack is empty no more executions");
         }
         IStatement crtStmt = stk.pop();
-        try {
-            return crtStmt.execute(state);
-        } catch (IOException e) {
-            throw new MyExceptions(e.getMessage());
-        }
+        return crtStmt.execute(state);
+
     }
 
     public String WrapperOneStep() throws  MyExceptions
@@ -51,6 +56,7 @@ public class ProgramController {
         while (!program.getStack().isEmpty())
         {
             oneStep(program);//here you can display the prg state
+            program.getHeapTable().setValues((HashMap)unsafeGarbageCollector(getAddrFromSymTable(program.getSymbolsTable().getValues().values()),program.getHeapTable().getValues()));;
             states.add(program.toString());
             repo.logProgramStateExecution();
         }

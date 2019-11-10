@@ -46,4 +46,14 @@ public class MyDictionary<K,V> implements  MyIDictionary<K,V> {
         }
         return content.toString();
     }
+
+    @Override
+    public void setValues(HashMap<K,V> new_values) {
+        dictionary=new_values;
+    }
+    public HashMap<K,V>  getValues()
+    {
+        return dictionary;
+    }
+
 }

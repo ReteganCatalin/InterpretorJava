@@ -5,5 +5,5 @@ import Model.Dict.MyIDictionary;
 import Model.Value.Value;
 
 public interface Expression {
-    Value eval(MyIDictionary<String, Value> tbl) throws MyExceptions;
+    Value eval(MyIDictionary<String, Value> symbolTable, MyIDictionary<Integer, Value> Heap) throws MyExceptions;
 }

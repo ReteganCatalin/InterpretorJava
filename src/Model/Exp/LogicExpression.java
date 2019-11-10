@@ -20,11 +20,11 @@ public class LogicExpression implements Expression {
     // override
 
 
-    public Value eval(MyIDictionary<String, Value> tbl) throws MyExceptions {
+    public Value eval(MyIDictionary<String, Value> symbolTable, MyIDictionary<Integer, Value> Heap) throws MyExceptions {
         Value v1, v2;
-        v1 = e1.eval(tbl);
+        v1 = e1.eval(symbolTable,Heap );
         if (v1.getType().equals(new BoolType())) {
-            v2 = e2.eval(tbl);
+            v2 = e2.eval(symbolTable,Heap );
             if (v2.getType().equals(new BoolType())) {
                 BoolValue i1 = (BoolValue) v1;
                 BoolValue i2 = (BoolValue) v2;

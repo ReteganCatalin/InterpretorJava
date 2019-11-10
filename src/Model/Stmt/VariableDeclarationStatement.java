@@ -5,11 +5,9 @@ import Model.Dict.MyIDictionary;
 import Model.ProgramState;
 import Model.Type.BoolType;
 import Model.Type.IntType;
+import Model.Type.StringType;
 import Model.Type.Type;
-import Model.Value.BoolValue;
-import Model.Value.IntValue;
-import Model.Value.StringValue;
-import Model.Value.Value;
+import Model.Value.*;
 
 public class VariableDeclarationStatement implements IStatement
 {
@@ -30,7 +28,7 @@ public class VariableDeclarationStatement implements IStatement
 
     public ProgramState execute(ProgramState state) throws MyExceptions
     {
-        MyIDictionary<String, Value> symTbl = state.getSymTable();
+        MyIDictionary<String, Value> symTbl = state.getSymbolsTable();
         if(symTbl.isDefined(name)==true)
         {
             throw new MyExceptions("It is already defined");
@@ -46,10 +44,15 @@ public class VariableDeclarationStatement implements IStatement
                 IntValue inter = (IntValue) typ.defaultValue();
                 symTbl.update(name, inter);
             }
-            else
+            else if(typ.equals(new StringType()))
             {
                 StringValue string = (StringValue) typ.defaultValue();
                 symTbl.update(name, string);
+            }
+            else
+            {
+                ReferenceValue reference= (ReferenceValue) typ.defaultValue();
+                symTbl.update(name,reference);
             }
 
         }

@@ -19,10 +19,12 @@ public class openReaderFile implements IStatement {
     }
     public ProgramState execute(ProgramState state) throws MyExceptions{
         MyIDictionary<String,BufferedReader> fileTable = state.getFileTable();
-        MyIDictionary<String, Value> symTbl = state.getSymTable();
-        if (expression.eval(symTbl).getType().equals(new StringType()))
+        MyIDictionary<String, Value> symTbl = state.getSymbolsTable();
+        MyIDictionary<Integer, Value> heap = state.getHeapTable();
+
+        if (expression.eval(symTbl,heap ).getType().equals(new StringType()))
         {
-            StringValue file_name=(StringValue) expression.eval(symTbl);
+            StringValue file_name=(StringValue) expression.eval(symTbl,heap );
 
             if(fileTable.isDefined(file_name.getValue())==true){
                 throw new MyExceptions("Key found!");

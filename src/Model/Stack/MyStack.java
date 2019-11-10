@@ -42,4 +42,8 @@ public class MyStack<T> implements  MyIStack<T>{
     }
         return content.toString();
     }
+
+    public Stack<T> getStack() {
+        return stack;
+    }
 }

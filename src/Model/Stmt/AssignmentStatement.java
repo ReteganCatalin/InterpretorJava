@@ -7,7 +7,7 @@ import Model.ProgramState;
 import Model.Type.Type;
 import Model.Value.Value;
 
-public class AssignStatement implements IStatement {
+public class AssignmentStatement implements IStatement {
     String id;
     Expression expression;
     public String toString()
@@ -15,14 +15,15 @@ public class AssignStatement implements IStatement {
         return id+"="+ expression.toString();
     }
 
-    public AssignStatement(String id, Expression expression) {
+    public AssignmentStatement(String id, Expression expression) {
         this.id = id;
         this.expression = expression;
     }
 
     public ProgramState execute(ProgramState state) throws MyExceptions {
-        MyIDictionary<String, Value> symTbl = state.getSymTable();
-        Value val = expression.eval(symTbl);
+        MyIDictionary<String, Value> symTbl = state.getSymbolsTable();
+        MyIDictionary<Integer, Value> heap = state.getHeapTable();
+        Value val = expression.eval(symTbl,heap );
         if (symTbl.isDefined(id)) {
             Type typId;
             try {

@@ -5,7 +5,7 @@ import Model.Value.Value;
 
 public class ValueExpression implements Expression {
     Value e;
-    public Value eval(MyIDictionary<String,Value> tbl)
+    public Value eval(MyIDictionary<String, Value> symbolTable, MyIDictionary<Integer, Value> Heap)
     {
         return e;
     }

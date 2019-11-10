@@ -6,12 +6,12 @@ import Model.Type.BoolType;
 import Model.Value.BoolValue;
 import Model.Value.Value;
 
-public class LogicExp implements Exp {
-    Exp e1;
-    Exp e2;
+public class LogicExpression implements Expression {
+    Expression e1;
+    Expression e2;
     int op; //1-plus, 2-minus, 3-star, 4-divide
 
-    public LogicExp(int op,Exp e1, Exp e2) {
+    public LogicExpression(int op, Expression e1, Expression e2) {
         this.e1 = e1;
         this.e2 = e2;
         this.op = op;
@@ -29,8 +29,8 @@ public class LogicExp implements Exp {
                 BoolValue i1 = (BoolValue) v1;
                 BoolValue i2 = (BoolValue) v2;
                 boolean b1, b2;
-                b1 = i1.getVal();
-                b2 = i2.getVal();
+                b1 = i1.getValue();
+                b2 = i2.getValue();
                 if (op == 1) return new BoolValue(b1 && b2);
                 else if (op == 2) return new BoolValue(b1 || b2);
 

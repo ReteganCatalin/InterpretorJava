@@ -2,28 +2,27 @@ package Model.Stmt;
 
 import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
-import Model.Exp.Exp;
+import Model.Exp.Expression;
 import Model.ProgramState;
-import Model.Stack.MyIStack;
 import Model.Type.Type;
 import Model.Value.Value;
 
-public class AssignStmt implements  IStmt{
+public class AssignStatement implements IStatement {
     String id;
-    Exp exp;
+    Expression expression;
     public String toString()
     {
-        return id+"="+ exp.toString();
+        return id+"="+ expression.toString();
     }
 
-    public AssignStmt(String id, Exp exp) {
+    public AssignStatement(String id, Expression expression) {
         this.id = id;
-        this.exp = exp;
+        this.expression = expression;
     }
 
     public ProgramState execute(ProgramState state) throws MyExceptions {
         MyIDictionary<String, Value> symTbl = state.getSymTable();
-        Value val = exp.eval(symTbl);
+        Value val = expression.eval(symTbl);
         if (symTbl.isDefined(id)) {
             Type typId;
             try {

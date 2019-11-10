@@ -7,27 +7,27 @@ import Model.List.MyIList;
 import Model.List.MyList;
 import Model.Stack.MyIStack;
 import Model.Stack.MyStack;
-import Model.Stmt.IStmt;
+import Model.Stmt.IStatement;
 import Model.Value.Value;
 
 import java.io.BufferedReader;
 
 public class ProgramState {
-    MyIStack<IStmt> statements;
+    MyIStack<IStatement> statements;
     MyIDictionary<String, Value> symTable;
     MyIList<Value> out;
     MyIDictionary<String, BufferedReader> fileTable;
-    IStmt originalProgram;
+    IStatement originalProgram;
 
-    public MyIStack<IStmt> getStack()
+    public MyIStack<IStatement> getStack()
     {
         return statements;
     }
     public MyIList<Value> getOutput() { return out; }
     public MyIDictionary<String,Value> getSymTable() {return symTable;}
 
-    public ProgramState(IStmt statement) {
-        this.statements = new MyStack<IStmt>();
+    public ProgramState(IStatement statement) {
+        this.statements = new MyStack<IStatement>();
         this.symTable = new MyDictionary<String, Value>();
         this.out = new MyList<Value>();
         this.fileTable=new FileTable<String,BufferedReader>();
@@ -37,7 +37,7 @@ public class ProgramState {
 
     }
 
-    public void setStatements(MyIStack<IStmt> statements) {
+    public void setStatements(MyIStack<IStatement> statements) {
         this.statements = statements;
     }
 

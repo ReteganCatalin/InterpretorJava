@@ -1,9 +1,9 @@
 package View;
 
 import Exceptions.MyExceptions;
-import Model.Exp.ArithExp;
-import Model.Exp.ValueExp;
-import Model.Exp.VarExp;
+import Model.Exp.ArithmeticExpression;
+import Model.Exp.ValueExpression;
+import Model.Exp.VariableExpression;
 import Model.ProgramState;
 import Model.Stmt.*;
 import Model.Type.BoolType;
@@ -19,35 +19,36 @@ import Repository.Repository;
 class Interpreter {
     public static void main(String[] args) {
         try {
-            IStmt ex1 = new CompStmt(new VarDeclStmt("v", new IntType()),
-                    new CompStmt(new AssignStmt("v", new ValueExp(new IntValue(2))), new PrintStmt(new VarExp("v"))));
+
+            IStatement ex1 = new CompoundStatement(new VariableDeclarationStatement("v", new IntType()),
+                    new CompoundStatement(new AssignStatement("v", new ValueExpression(new IntValue(2))), new PrintStatement(new VariableExpression("v"))));
             ProgramState prg1 = new ProgramState(ex1);
             Repository repo1 = new ProgramRepo(prg1, "log1.txt");
             ProgramController ctr1 = new ProgramController(repo1);
-            IStmt ex2 = new CompStmt(new VarDeclStmt("a", new IntType()),
-                    new CompStmt(new VarDeclStmt("b", new IntType()), new CompStmt(new AssignStmt("a", new ArithExp(1, new ValueExp(new IntValue(2))
-                            , new ArithExp(3, new ValueExp(new IntValue(3)), new ValueExp(new IntValue(5))))), new CompStmt(new AssignStmt("b", new ArithExp(1, new VarExp("a"),
-                            new ValueExp(new IntValue(1)))), new PrintStmt(new VarExp("b"))))));
+            IStatement ex2 = new CompoundStatement(new VariableDeclarationStatement("a", new IntType()),
+                    new CompoundStatement(new VariableDeclarationStatement("b", new IntType()), new CompoundStatement(new AssignStatement("a", new ArithmeticExpression(1, new ValueExpression(new IntValue(2))
+                            , new ArithmeticExpression(3, new ValueExpression(new IntValue(3)), new ValueExpression(new IntValue(5))))), new CompoundStatement(new AssignStatement("b", new ArithmeticExpression(1, new VariableExpression("a"),
+                            new ValueExpression(new IntValue(1)))), new PrintStatement(new VariableExpression("b"))))));
             ;
             ProgramState prg2 = new ProgramState(ex2);
             Repository repo2 = new ProgramRepo(prg2, "log2.txt");
             ProgramController ctr2 = new ProgramController(repo2);
-            IStmt ex3 = new CompStmt(new VarDeclStmt("a", new BoolType()),
-                    new CompStmt(new VarDeclStmt("v", new IntType()), new CompStmt(new AssignStmt("a", new ValueExp(new BoolValue(true))),
-                            new CompStmt(new IfStmt(new VarExp("v"), new AssignStmt("v", new ValueExp(new IntValue(2))), new AssignStmt("v", new ValueExp(new IntValue(3)))),
-                                    new PrintStmt(new VarExp("v"))))));
+            IStatement ex3 = new CompoundStatement(new VariableDeclarationStatement("a", new BoolType()),
+                    new CompoundStatement(new VariableDeclarationStatement("v", new IntType()), new CompoundStatement(new AssignStatement("a", new ValueExpression(new BoolValue(true))),
+                            new CompoundStatement(new IfStatement(new VariableExpression("v"), new AssignStatement("v", new ValueExpression(new IntValue(2))), new AssignStatement("v", new ValueExpression(new IntValue(3)))),
+                                    new PrintStatement(new VariableExpression("v"))))));
             ;
             ProgramState prg3 = new ProgramState(ex3);
             Repository repo3 = new ProgramRepo(prg3, "log3.txt");
             ProgramController ctr3 = new ProgramController(repo3);
-            IStmt ex4 = new CompStmt(
-                    new VarDeclStmt("varf", new StringType()), new CompStmt(
-                    new AssignStmt("varf", new ValueExp(new StringValue("test.txt"))), new CompStmt(
-                    new openRFile(new VarExp("varf")), new CompStmt(
-                    new VarDeclStmt("varc", new IntType()), new CompStmt(
-                    new ReadFile(new VarExp("varf"), "varc"), new CompStmt(
-                    new PrintStmt(new VarExp("varc")), new CompStmt(
-                    new ReadFile(new VarExp("varf"), "varc"), new CompStmt(new PrintStmt(new VarExp("varc")), new closeRFile(new VarExp("varf"))))))))));
+            IStatement ex4 = new CompoundStatement(
+                    new VariableDeclarationStatement("varf", new StringType()), new CompoundStatement(
+                    new AssignStatement("varf", new ValueExpression(new StringValue("test.txt"))), new CompoundStatement(
+                    new openReaderFile(new VariableExpression("varf")), new CompoundStatement(
+                    new VariableDeclarationStatement("varc", new IntType()), new CompoundStatement(
+                    new ReadFile(new VariableExpression("varf"), "varc"), new CompoundStatement(
+                    new PrintStatement(new VariableExpression("varc")), new CompoundStatement(
+                    new ReadFile(new VariableExpression("varf"), "varc"), new CompoundStatement(new PrintStatement(new VariableExpression("varc")), new closeReaderFile(new VariableExpression("varf"))))))))));
             ProgramState prg4 = new ProgramState(ex4);
             Repository repo4 = new ProgramRepo(prg4, "log4.txt");
             ProgramController ctr4 = new ProgramController(repo4);

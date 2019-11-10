@@ -9,7 +9,7 @@ public class BoolValue implements Value{
     {
         val=v;
     }
-    public boolean getVal()
+    public boolean getValue()
     {
         return val;
     }

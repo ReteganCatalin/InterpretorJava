@@ -11,7 +11,7 @@ public class IntValue implements Value {
     {
         val=v;
     }
-    public int getVal()
+    public int getValue()
     {
         return val;
     }

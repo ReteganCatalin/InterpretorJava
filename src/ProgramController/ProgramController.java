@@ -3,7 +3,7 @@ package ProgramController;
 import Exceptions.MyExceptions;
 import Model.ProgramState;
 import Model.Stack.MyIStack;
-import Model.Stmt.IStmt;
+import Model.Stmt.IStatement;
 import Repository.Repository;
 
 import java.io.IOException;
@@ -12,12 +12,12 @@ import java.util.ArrayList;
 public class ProgramController {
     Repository repo;
     public ProgramState oneStep(ProgramState state) throws MyExceptions {
-        MyIStack<IStmt> stk=state.getStack();
+        MyIStack<IStatement> stk=state.getStack();
         if(stk.isEmpty())
         {
             throw new MyExceptions("Stack is empty no more executions");
         }
-        IStmt  crtStmt = stk.pop();
+        IStatement crtStmt = stk.pop();
         try {
             return crtStmt.execute(state);
         } catch (IOException e) {
@@ -40,19 +40,19 @@ public class ProgramController {
     public ArrayList<String> allStep() throws MyExceptions
     {
         ArrayList<String> states=new ArrayList<String>() ;
-        ProgramState prg = repo.getCurrentProgram();
-        if(prg.getStack().isEmpty())
+        ProgramState program = repo.getCurrentProgram();
+        if(program.getStack().isEmpty())
         {
             throw new MyExceptions("The Stack is Empty the program is done");
 
         }
-        states.add(prg.toString());
-        repo.logPrgStateExec();
-        while (!prg.getStack().isEmpty())
+        states.add(program.toString());
+        repo.logProgramStateExecution();
+        while (!program.getStack().isEmpty())
         {
-            oneStep(prg);//here you can display the prg state
-            states.add(prg.toString());
-            repo.logPrgStateExec();
+            oneStep(program);//here you can display the prg state
+            states.add(program.toString());
+            repo.logProgramStateExecution();
         }
         return states;
     }

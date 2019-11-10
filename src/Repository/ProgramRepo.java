@@ -18,7 +18,7 @@ public class  ProgramRepo implements  Repository{
         return repo.get(0);
     }
 
-    public void logPrgStateExec() throws MyExceptions
+    public void logProgramStateExecution() throws MyExceptions
     {
         try {
             PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)));

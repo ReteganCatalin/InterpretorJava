@@ -1,7 +1,6 @@
 package Model.Stack;
 
 import Exceptions.MyExceptions;
-import Model.Stmt.IStmt;
 
 public interface MyIStack<T> {
     T pop() throws MyExceptions;

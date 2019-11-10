@@ -5,5 +5,5 @@ import Model.ProgramState;
 
 public interface Repository {
     ProgramState getCurrentProgram();
-    void logPrgStateExec() throws MyExceptions;
+    void logProgramStateExecution() throws MyExceptions;
 }

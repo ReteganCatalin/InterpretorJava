@@ -1,31 +1,30 @@
 package Model.Stmt;
 import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
-import Model.Exp.Exp;
+import Model.Exp.Expression;
 import Model.List.MyIList;
 import Model.ProgramState;
-import Model.Stmt.IStmt;
 import Model.Value.Value;
 
-public class PrintStmt implements IStmt
+public class PrintStatement implements IStatement
 {
-    Exp exp;
+    Expression expression;
 
-    public PrintStmt(Exp exp) {
-        this.exp = exp;
+    public PrintStatement(Expression expression) {
+        this.expression = expression;
     }
 
     @Override
     public String toString()
     {
-        return "print(" +exp.toString()+")";
+        return "print(" + expression.toString()+")";
     }
 
     public ProgramState execute(ProgramState state) throws MyExceptions
     {
         MyIList<Value> out=state.getOutput();
         MyIDictionary<String,Value>  symTable=state.getSymTable();
-        out.add(exp.eval(symTable));
+        out.add(expression.eval(symTable));
         return state;
     }
 }

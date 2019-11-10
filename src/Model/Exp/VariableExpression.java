@@ -4,7 +4,7 @@ import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
 import Model.Value.Value;
 
-public class VarExp implements Exp
+public class VariableExpression implements Expression
 {
     String id;
     public Value eval(MyIDictionary<String,Value> tbl) throws MyExceptions
@@ -12,7 +12,7 @@ public class VarExp implements Exp
         return tbl.lookup(id);
     }
 
-    public VarExp(String id) {
+    public VariableExpression(String id) {
         this.id = id;
     }
 

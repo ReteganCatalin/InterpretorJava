@@ -2,7 +2,7 @@ package Model.Stmt;
 
 import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
-import Model.Exp.Exp;
+import Model.Exp.Expression;
 import Model.ProgramState;
 import Model.Type.StringType;
 import Model.Value.StringValue;
@@ -12,26 +12,26 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class openRFile implements IStmt {
-    Exp exp;
-    public openRFile(Exp express) {
-        exp=express;
+public class openReaderFile implements IStatement {
+    Expression expression;
+    public openReaderFile(Expression express) {
+        expression =express;
     }
     public ProgramState execute(ProgramState state) throws MyExceptions{
         MyIDictionary<String,BufferedReader> fileTable = state.getFileTable();
         MyIDictionary<String, Value> symTbl = state.getSymTable();
-        if (exp.eval(symTbl).getType().equals(new StringType()))
+        if (expression.eval(symTbl).getType().equals(new StringType()))
         {
-            StringValue file_name=(StringValue)exp.eval(symTbl);
+            StringValue file_name=(StringValue) expression.eval(symTbl);
 
-            if(fileTable.isDefined(file_name.getVal())==true){
+            if(fileTable.isDefined(file_name.getValue())==true){
                 throw new MyExceptions("Key found!");
             }
             else
             {
                     try {
-                        BufferedReader buffreader = new BufferedReader(new FileReader(file_name.getVal()));
-                        fileTable.update(file_name.getVal(),buffreader);
+                        BufferedReader buffreader = new BufferedReader(new FileReader(file_name.getValue()));
+                        fileTable.update(file_name.getValue(),buffreader);
                     }
                     catch(IOException exce) {
                         throw new MyExceptions(exce.getMessage());
@@ -44,6 +44,6 @@ public class openRFile implements IStmt {
 
     @Override
     public String toString() {
-        return "open file: "+exp.toString();
+        return "open file: "+ expression.toString();
     }
 }

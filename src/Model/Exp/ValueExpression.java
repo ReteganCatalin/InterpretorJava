@@ -3,14 +3,14 @@ package Model.Exp;
 import Model.Dict.MyIDictionary;
 import Model.Value.Value;
 
-public class ValueExp implements Exp {
+public class ValueExpression implements Expression {
     Value e;
     public Value eval(MyIDictionary<String,Value> tbl)
     {
         return e;
     }
 
-    public ValueExp(Value e) {
+    public ValueExpression(Value e) {
         this.e = e;
     }
 

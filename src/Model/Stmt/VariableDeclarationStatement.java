@@ -11,12 +11,12 @@ import Model.Value.IntValue;
 import Model.Value.StringValue;
 import Model.Value.Value;
 
-public class VarDeclStmt implements IStmt
+public class VariableDeclarationStatement implements IStatement
 {
     String name;
     Type typ;
 
-    public VarDeclStmt(String namer,Type t)
+    public VariableDeclarationStatement(String namer, Type t)
     {
         typ=t;
         name=namer;

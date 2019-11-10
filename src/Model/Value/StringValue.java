@@ -9,7 +9,7 @@ public class StringValue implements Value {
     {
         val=v;
     }
-    public String getVal()
+    public String getValue()
     {
         return val;
     }

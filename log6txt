@@ -1,6 +1,6 @@
 ProgramState:
 ExeStack:
-{Reference(int) v;;{new (v,20);{print(HeapReading (v));{Reference(Reference(int)) a;;{new (a,v);print(HeapReading (HeapReading (a))+5)}}}}}
+{Reference(int) v;;{new (v,20);{print(HeapReading (v));{Reference(Reference(int)) a;;{new (a,v);{new (v,30);print(HeapReading (HeapReading (a))+5)}}}}}}
 
 SymbolsTable:
 
@@ -13,7 +13,7 @@ Heap:
 ProgramState:
 ExeStack:
 Reference(int) v;
-{new (v,20);{print(HeapReading (v));{Reference(Reference(int)) a;;{new (a,v);print(HeapReading (HeapReading (a))+5)}}}}
+{new (v,20);{print(HeapReading (v));{Reference(Reference(int)) a;;{new (a,v);{new (v,30);print(HeapReading (HeapReading (a))+5)}}}}}
 
 SymbolsTable:
 
@@ -25,7 +25,7 @@ Heap:
 
 ProgramState:
 ExeStack:
-{new (v,20);{print(HeapReading (v));{Reference(Reference(int)) a;;{new (a,v);print(HeapReading (HeapReading (a))+5)}}}}
+{new (v,20);{print(HeapReading (v));{Reference(Reference(int)) a;;{new (a,v);{new (v,30);print(HeapReading (HeapReading (a))+5)}}}}}
 
 SymbolsTable:
 (v=(0,int))
@@ -39,7 +39,7 @@ Heap:
 ProgramState:
 ExeStack:
 new (v,20)
-{print(HeapReading (v));{Reference(Reference(int)) a;;{new (a,v);print(HeapReading (HeapReading (a))+5)}}}
+{print(HeapReading (v));{Reference(Reference(int)) a;;{new (a,v);{new (v,30);print(HeapReading (HeapReading (a))+5)}}}}
 
 SymbolsTable:
 (v=(0,int))
@@ -52,7 +52,7 @@ Heap:
 
 ProgramState:
 ExeStack:
-{print(HeapReading (v));{Reference(Reference(int)) a;;{new (a,v);print(HeapReading (HeapReading (a))+5)}}}
+{print(HeapReading (v));{Reference(Reference(int)) a;;{new (a,v);{new (v,30);print(HeapReading (HeapReading (a))+5)}}}}
 
 SymbolsTable:
 (v=(1,int))
@@ -62,12 +62,12 @@ Out:
 FileTable:
 
 Heap:
-(1->->20)
+(1->20)
 
 ProgramState:
 ExeStack:
 print(HeapReading (v))
-{Reference(Reference(int)) a;;{new (a,v);print(HeapReading (HeapReading (a))+5)}}
+{Reference(Reference(int)) a;;{new (a,v);{new (v,30);print(HeapReading (HeapReading (a))+5)}}}
 
 SymbolsTable:
 (v=(1,int))
@@ -77,11 +77,11 @@ Out:
 FileTable:
 
 Heap:
-(1->->20)
+(1->20)
 
 ProgramState:
 ExeStack:
-{Reference(Reference(int)) a;;{new (a,v);print(HeapReading (HeapReading (a))+5)}}
+{Reference(Reference(int)) a;;{new (a,v);{new (v,30);print(HeapReading (HeapReading (a))+5)}}}
 
 SymbolsTable:
 (v=(1,int))
@@ -92,12 +92,12 @@ Out:
 FileTable:
 
 Heap:
-(1->->20)
+(1->20)
 
 ProgramState:
 ExeStack:
 Reference(Reference(int)) a;
-{new (a,v);print(HeapReading (HeapReading (a))+5)}
+{new (a,v);{new (v,30);print(HeapReading (HeapReading (a))+5)}}
 
 SymbolsTable:
 (v=(1,int))
@@ -108,11 +108,11 @@ Out:
 FileTable:
 
 Heap:
-(1->->20)
+(1->20)
 
 ProgramState:
 ExeStack:
-{new (a,v);print(HeapReading (HeapReading (a))+5)}
+{new (a,v);{new (v,30);print(HeapReading (HeapReading (a))+5)}}
 
 SymbolsTable:
 (a=(0,Reference(int)))
@@ -124,12 +124,12 @@ Out:
 FileTable:
 
 Heap:
-(1->->20)
+(1->20)
 
 ProgramState:
 ExeStack:
 new (a,v)
-print(HeapReading (HeapReading (a))+5)
+{new (v,30);print(HeapReading (HeapReading (a))+5)}
 
 SymbolsTable:
 (a=(0,Reference(int)))
@@ -141,10 +141,28 @@ Out:
 FileTable:
 
 Heap:
-(1->->20)
+(1->20)
 
 ProgramState:
 ExeStack:
+{new (v,30);print(HeapReading (HeapReading (a))+5)}
+
+SymbolsTable:
+(a=(2,Reference(int)))
+(v=(1,int))
+
+Out:
+20
+
+FileTable:
+
+Heap:
+(1->20)
+(2->(1,int))
+
+ProgramState:
+ExeStack:
+new (v,30)
 print(HeapReading (HeapReading (a))+5)
 
 SymbolsTable:
@@ -157,23 +175,40 @@ Out:
 FileTable:
 
 Heap:
-(1->->20)
-(2->->(1,int))
+(1->20)
+(2->(1,int))
+
+ProgramState:
+ExeStack:
+print(HeapReading (HeapReading (a))+5)
+
+SymbolsTable:
+(a=(2,Reference(int)))
+(v=(3,int))
+
+Out:
+20
+
+FileTable:
+
+Heap:
+(2->(3,int))
+(3->30)
 
 ProgramState:
 ExeStack:
 
 SymbolsTable:
 (a=(2,Reference(int)))
-(v=(1,int))
+(v=(3,int))
 
 Out:
 20
-25
+35
 
 FileTable:
 
 Heap:
-(1->->20)
-(2->->(1,int))
+(2->(3,int))
+(3->30)
 

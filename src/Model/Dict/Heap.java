@@ -39,7 +39,6 @@ public class Heap<K,V> implements MyIDictionary<K,V> {
             content.append("(")
                     .append(entry.getKey())
                     .append("->")
-                    .append("->")
                     .append(entry.getValue())
                     .append(")")
                     .append("\n");

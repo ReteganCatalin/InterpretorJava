@@ -74,8 +74,9 @@ class Interpreter {
                             new CompoundStatement(
                                     new PrintStatement(new HeapReading(new VariableExpression("v"))), new CompoundStatement(
                                             new VariableDeclarationStatement("a",new ReferenceType(new ReferenceType(new  IntType()))), new CompoundStatement(
-                                                new HeapAllocation("a",new VariableExpression("v")),
-                                                        new PrintStatement(new ArithmeticExpression(1 ,new HeapReading(new HeapReading( new VariableExpression("a"))),new ValueExpression(new IntValue(5)))))))));
+                                                new HeapAllocation("a",new VariableExpression("v")),new CompoundStatement(
+                                                        new HeapAllocation("v",new ValueExpression(new IntValue(30))),
+                                                        new PrintStatement(new ArithmeticExpression(1 ,new HeapReading(new HeapReading( new VariableExpression("a"))),new ValueExpression(new IntValue(5))))))))));
 
             ProgramState prg6 = new ProgramState(ex6);
             Repository repo6= new ProgramRepo(prg6, "log6txt");

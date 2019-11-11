@@ -81,6 +81,20 @@ class Interpreter {
             ProgramState prg6 = new ProgramState(ex6);
             Repository repo6= new ProgramRepo(prg6, "log6txt");
             ProgramController ctr6 = new ProgramController(repo6);
+            IStatement ex7 = new CompoundStatement(
+                    new VariableDeclarationStatement("v",new ReferenceType(new IntType())),
+                    new CompoundStatement(
+                            new HeapAllocation("v",new ValueExpression(new IntValue(20))),
+                            new CompoundStatement(
+                                    new PrintStatement(new HeapReading(new VariableExpression("v"))), new CompoundStatement(
+                                    new VariableDeclarationStatement("a",new ReferenceType(new ReferenceType(new  IntType()))), new CompoundStatement(
+                                    new HeapAllocation("a",new VariableExpression("v")),new CompoundStatement(
+                                    new HeapWrite("v",new ValueExpression(new IntValue(30))),
+                                    new PrintStatement(new ArithmeticExpression(1 ,new HeapReading(new HeapReading( new VariableExpression("a"))),new ValueExpression(new IntValue(5))))))))));
+
+            ProgramState prg7 = new ProgramState(ex7);
+            Repository repo7= new ProgramRepo(prg7, "log7txt");
+            ProgramController ctr7 = new ProgramController(repo7);
             TextMenu menu = new TextMenu();
             menu.addCommand(new ExitCommand("0", "exit"));
             menu.addCommand(new RunCommand("1", ex1.toString(), ctr1));
@@ -89,6 +103,7 @@ class Interpreter {
             menu.addCommand(new RunCommand("4", ex4.toString(), ctr4));
             menu.addCommand(new RunCommand("5", ex5.toString(), ctr5));
             menu.addCommand(new RunCommand("6", ex6.toString(), ctr6));
+            menu.addCommand(new RunCommand("7", ex7.toString(), ctr7));
             menu.show();
         }
         catch(MyExceptions exception)

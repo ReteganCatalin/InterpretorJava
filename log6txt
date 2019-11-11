@@ -192,7 +192,8 @@ Out:
 FileTable:
 
 Heap:
-(2->(3,int))
+(1->20)
+(2->(1,int))
 (3->30)
 
 ProgramState:
@@ -204,11 +205,12 @@ SymbolsTable:
 
 Out:
 20
-35
+25
 
 FileTable:
 
 Heap:
-(2->(3,int))
+(1->20)
+(2->(1,int))
 (3->30)
 

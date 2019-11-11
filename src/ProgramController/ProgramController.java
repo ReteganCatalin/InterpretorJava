@@ -10,14 +10,21 @@ import Repository.Repository;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ProgramController {
     Repository repo;
-    Map<Integer, Value> unsafeGarbageCollector(List<Integer> symTableAddr, Map<Integer,Value> heap)
+    Map<Integer, Value> safeGarbageCollector(List<Integer> symTableAddr, Map<Integer,Value> heap)
     {return heap.entrySet().stream().filter(e->symTableAddr.contains(e.getKey())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));}
-    List<Integer> getAddrFromSymTable(Collection<Value> symTableValues){
-        return symTableValues.stream().filter(v-> v instanceof ReferenceValue)
-                .map(v-> {ReferenceValue v1 = (ReferenceValue)v; return v1.getAddress();}).collect(Collectors.toList());}
+    List<Integer> getAddrFromSymTable(Collection<Value> symTableValues,Collection<Value> heap){
+        return  Stream.concat(
+                heap.stream()
+                        .filter(v-> v instanceof ReferenceValue)
+                        .map(v-> {ReferenceValue v1 = (ReferenceValue)v; return v1.getAddress();})
+                ,symTableValues.stream()
+                        .filter(v-> v instanceof ReferenceValue)
+                        .map(v-> {ReferenceValue v1 = (ReferenceValue)v; return v1.getAddress();})).collect(Collectors.toList());
+    }
 
     public ProgramState oneStep(ProgramState state) throws MyExceptions {
         MyIStack<IStatement> stk=state.getStack();
@@ -56,9 +63,9 @@ public class ProgramController {
         while (!program.getStack().isEmpty())
         {
             oneStep(program);//here you can display the prg state
-            program.getHeapTable().setValues((HashMap)unsafeGarbageCollector(getAddrFromSymTable(program.getSymbolsTable().getValues().values()),program.getHeapTable().getValues()));;
             states.add(program.toString());
             repo.logProgramStateExecution();
+            program.getHeapTable().setValues((HashMap)safeGarbageCollector(getAddrFromSymTable(program.getSymbolsTable().getValues().values(),program.getHeapTable().getValues().values()),program.getHeapTable().getValues()));;
         }
         return states;
     }

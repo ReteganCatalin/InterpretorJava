@@ -27,4 +27,8 @@ public class ReferenceValue implements Value {
     public Type getType() {
         return new ReferenceType(locationType);
     }
+    public Type getLocationType(){
+        return locationType;
+    }
+
 }

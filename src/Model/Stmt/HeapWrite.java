@@ -12,7 +12,7 @@ public class HeapWrite implements IStatement {
     Expression expression;
     String variable_name;
 
-    public HeapWrite(Expression expression, String variable_name) {
+    public HeapWrite(String variable_name,Expression expression) {
         this.expression = expression;
         this.variable_name = variable_name;
     }
@@ -26,8 +26,8 @@ public class HeapWrite implements IStatement {
                 ReferenceValue referenced_value=(ReferenceValue)symbolTabel.lookup(variable_name);
                 int address=referenced_value.getAddress();
                 if (Heap.isDefined(address)) {
-                    if(expression.eval(symbolTabel, Heap).equals(Heap.lookup(address))) {
-                        Heap.update(address,(ReferenceValue)expression.eval(symbolTabel, Heap));
+                    if(expression.eval(symbolTabel, Heap).getType().equals(Heap.lookup(address).getType())) {
+                        Heap.update(address,expression.eval(symbolTabel, Heap));
                         return state;
                     }
                     else {

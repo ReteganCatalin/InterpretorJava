@@ -65,7 +65,7 @@ class Interpreter {
                                     )
                             )));
             ProgramState prg5 = new ProgramState(ex5 );
-            Repository repo5= new ProgramRepo(prg5, "log5txt");
+            Repository repo5= new ProgramRepo(prg5, "log5.txt");
             ProgramController ctr5 = new ProgramController(repo5);
             IStatement ex6 = new CompoundStatement(
                     new VariableDeclarationStatement("v",new ReferenceType(new IntType())),
@@ -79,7 +79,7 @@ class Interpreter {
                                                         new PrintStatement(new ArithmeticExpression(1 ,new HeapReading(new HeapReading( new VariableExpression("a"))),new ValueExpression(new IntValue(5))))))))));
 
             ProgramState prg6 = new ProgramState(ex6);
-            Repository repo6= new ProgramRepo(prg6, "log6txt");
+            Repository repo6= new ProgramRepo(prg6, "log6.txt");
             ProgramController ctr6 = new ProgramController(repo6);
             IStatement ex7 = new CompoundStatement(
                     new VariableDeclarationStatement("v",new ReferenceType(new IntType())),
@@ -93,8 +93,21 @@ class Interpreter {
                                     new PrintStatement(new ArithmeticExpression(1 ,new HeapReading(new HeapReading( new VariableExpression("a"))),new ValueExpression(new IntValue(5))))))))));
 
             ProgramState prg7 = new ProgramState(ex7);
-            Repository repo7= new ProgramRepo(prg7, "log7txt");
+            Repository repo7= new ProgramRepo(prg7, "log7.txt");
             ProgramController ctr7 = new ProgramController(repo7);
+            IStatement ex8 = new CompoundStatement(new VariableDeclarationStatement("v", new IntType()),
+                    new CompoundStatement(new VariableDeclarationStatement("a", new ReferenceType(new IntType())),
+                            new CompoundStatement(new AssignmentStatement("v", new ValueExpression(new IntValue(10))),
+                                    new CompoundStatement(new HeapAllocation("a", new ValueExpression(new IntValue(22))),
+                                            new CompoundStatement(new ForkStatement(new CompoundStatement(new HeapWrite("a", new ValueExpression(new IntValue(30))),
+                                                    new CompoundStatement(new AssignmentStatement("v", new ValueExpression(new IntValue(32))),
+                                                            new CompoundStatement(new PrintStatement(new VariableExpression("v")),
+                                                                    new PrintStatement(new HeapReading(new VariableExpression("a"))))))),
+                                                    new CompoundStatement(new PrintStatement(new VariableExpression("v")),
+                                                            new PrintStatement(new HeapReading(new VariableExpression("a")))))))));
+            ProgramState prg8 = new ProgramState(ex8);
+            Repository repo8= new ProgramRepo(prg8, "log8.txt");
+            ProgramController ctr8 = new ProgramController(repo8);
             TextMenu menu = new TextMenu();
             menu.addCommand(new ExitCommand("0", "exit"));
             menu.addCommand(new RunCommand("1", ex1.toString(), ctr1));
@@ -104,6 +117,7 @@ class Interpreter {
             menu.addCommand(new RunCommand("5", ex5.toString(), ctr5));
             menu.addCommand(new RunCommand("6", ex6.toString(), ctr6));
             menu.addCommand(new RunCommand("7", ex7.toString(), ctr7));
+            menu.addCommand(new RunCommand("8", ex8.toString(), ctr8));
             menu.show();
         }
         catch(MyExceptions exception)

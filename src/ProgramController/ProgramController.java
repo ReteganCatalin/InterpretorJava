@@ -6,9 +6,7 @@ import Model.Value.ReferenceValue;
 import Model.Value.Value;
 import Repository.Repository;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -29,7 +27,7 @@ public class ProgramController {
                 .map(v -> {ReferenceValue v1 = (ReferenceValue) v; return v1.getAddress();})
                 .collect(Collectors.toList());
     }
-    List<Integer> getAllAddresesfromSymbolTable()
+    List<Integer> getAllSymbolTableAdresses()
     {
         return repo.getProgramList().stream()
                 .map(p -> getSymbolTableAddresses(p.getSymbolsTable().getValues().values()))
@@ -37,6 +35,36 @@ public class ProgramController {
                         (acc, item) -> Stream.concat(acc.stream(), item.stream())
                                 .collect(Collectors.toList()));
     }
+
+    List<Integer> extractAllValidAddresses()
+    {
+        Set<Map.Entry<Integer, Value>> heapEntrySet = repo.getProgramList().get(0).getHeapTable().getValues().entrySet();
+        LinkedList<Integer> indirectAddressesList = new LinkedList<>(getAllSymbolTableAdresses());
+        boolean doneExtracting = false;
+        while (!doneExtracting) {
+            doneExtracting = true;
+            List <Integer> currentIndirectPhaseAddresses = heapEntrySet.stream()
+                    .filter(entry -> indirectAddressesList.contains(entry.getKey()))
+                    .filter(entry -> entry.getValue() instanceof ReferenceValue)
+                    .map(entry -> {ReferenceValue v = (ReferenceValue) entry.getValue();
+                        return v.getAddress();})
+                    .filter(entry -> !indirectAddressesList.contains(entry))
+                    .collect(Collectors.toList());
+
+            if (!currentIndirectPhaseAddresses.isEmpty()) {
+                doneExtracting = false;
+                indirectAddressesList.addAll(currentIndirectPhaseAddresses);
+            }
+        }
+        return indirectAddressesList;
+    }
+
+    void callGarbageCollector()
+    {
+        repo.getProgramList().get(0).getHeapTable().setValues((HashMap)safeGarbageCollector(extractAllValidAddresses(),repo.getProgramList().get(0).getHeapTable().getValues()));
+    }
+
+
 
 
     public void allStep() throws MyExceptions

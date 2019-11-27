@@ -1,9 +1,7 @@
 package View;
 
-import ProgramController.ProgramController;
 import Exceptions.MyExceptions;
-
-import java.util.ArrayList;
+import ProgramController.ProgramController;
 
 public class RunCommand extends Command {
     private ProgramController ctrl;
@@ -18,12 +16,7 @@ public class RunCommand extends Command {
     {
         try {
 
-            ArrayList<String> To_print = ctrl.allStep();
-            {
-                for (String item : To_print) {
-                    System.out.println(item);
-                }
-            }
+            ctrl.allStep();
 
         } catch (MyExceptions exceptions) {
             System.out.println(exceptions.getMessage());

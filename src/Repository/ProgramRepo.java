@@ -9,16 +9,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class  ProgramRepo implements  Repository{
-    ArrayList<ProgramState> states =new ArrayList<ProgramState>();
+    List<ProgramState> states =new ArrayList<ProgramState>();
     String logFilePath="log.txt";
     @Override
-    public ArrayList<ProgramState> getProgramList() {
+    public List<ProgramState> getProgramList() {
         return states;
     }
 
-    public void setProgramStates(ArrayList<ProgramState> new_states)
+    public void setProgramStates(List<ProgramState> new_states)
     {
         states=new_states;
     }

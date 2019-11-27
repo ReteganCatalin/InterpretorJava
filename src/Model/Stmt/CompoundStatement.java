@@ -11,7 +11,7 @@ public class CompoundStatement implements IStatement {
         MyIStack<IStatement> stack=state.getStack();
         stack.push(second);
         stack.push(first);
-        return state;
+        return null;
     }
     public String toString()
     {
@@ -21,5 +21,10 @@ public class CompoundStatement implements IStatement {
     public CompoundStatement(IStatement f, IStatement s) {
         first=f;
         second=s;
+    }
+
+    public IStatement deepCopy()
+    {
+        return new CompoundStatement(first.deepCopy(),second.deepCopy());
     }
 }

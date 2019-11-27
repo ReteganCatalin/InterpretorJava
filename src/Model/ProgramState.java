@@ -1,5 +1,6 @@
 package Model;
 
+import Exceptions.MyExceptions;
 import Model.Dict.FileTable;
 import Model.Dict.Heap;
 import Model.Dict.MyDictionary;
@@ -20,13 +21,20 @@ public class ProgramState {
     MyIDictionary<String, BufferedReader> fileTable;
     MyIDictionary<Integer, Value> HeapTable;
     IStatement originalProgram;
-
+    private int identificator;
+    public static int lastID;
     public MyIStack<IStatement> getStack()
     {
         return statements;
     }
     public MyIList<Value> getOutput() { return out; }
     public MyIDictionary<String,Value> getSymbolsTable() {return symbolsTable;}
+    public Boolean isNotCompleted()
+    {
+        if(statements.isEmpty())
+            return false;
+        return true;
+    }
 
     public ProgramState(IStatement statement) {
         this.statements = new MyStack<IStatement>();
@@ -36,9 +44,10 @@ public class ProgramState {
         this.HeapTable=new Heap<Integer, Value>();
         originalProgram=statement;
         statements.push(statement);
-
+        identificator=getnewID();
 
     }
+
 
     public MyIDictionary<Integer, Value> getHeapTable() {
         return HeapTable;
@@ -68,9 +77,23 @@ public class ProgramState {
         this.fileTable = fileTable;
     }
 
+    public ProgramState oneStep() throws MyExceptions {
+        if(statements.isEmpty())
+        {
+            throw new MyExceptions("Stack is empty no more executions");
+        }
+        IStatement currentStatement = statements.pop();
+        return currentStatement.execute(this);
+
+    }
+    public synchronized int getnewID()
+    {
+        lastID++;
+        return lastID;
+    }
     @Override
     public String toString() {
-        return "ProgramState:" +
+        return "ProgramState with id: " + identificator +
                 "\n" +
                 "ExeStack:\n" + statements +"\n"+
                 "SymbolsTable:\n" + symbolsTable + "\n" +

@@ -22,4 +22,9 @@ public class IntType implements  Type {
     {
         return "int";
     }
+    public Type deepCopy()
+    {
+        return new  IntType();
+    }
+
 }

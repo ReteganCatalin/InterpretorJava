@@ -64,7 +64,7 @@ class Interpreter {
                                             new AssignmentStatement( "v",new ArithmeticExpression(2,new VariableExpression("v"),new ValueExpression(new IntValue(1))))
                                     )
                             )));
-            ProgramState prg5 = new ProgramState(ex5);
+            ProgramState prg5 = new ProgramState(ex5 );
             Repository repo5= new ProgramRepo(prg5, "log5txt");
             ProgramController ctr5 = new ProgramController(repo5);
             IStatement ex6 = new CompoundStatement(

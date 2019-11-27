@@ -42,11 +42,16 @@ public class closeReaderFile implements IStatement {
             }
         }
 
-        return state;
+        return null;
     }
 
     @Override
     public String toString() {
         return "close file: "+ expression.toString();
+    }
+
+    public IStatement deepCopy()
+    {
+        return new closeReaderFile(expression.deepCopy());
     }
 }

@@ -58,9 +58,12 @@ public class HeapAllocation implements IStatement {
                     }
                 }
         }
-        return state;
+        return null;
     }
-
+    public IStatement deepCopy()
+    {
+        return new HeapAllocation(new String(variable_name),expression.deepCopy());
+    }
     @Override
     public String toString() {
         return "new (" + variable_name + ","

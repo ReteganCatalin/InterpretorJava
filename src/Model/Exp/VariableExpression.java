@@ -16,6 +16,11 @@ public class VariableExpression implements Expression
         this.id = id;
     }
 
+    public Expression deepCopy()
+    {
+        return new VariableExpression(new String(id));
+    }
+
     @Override
     public String toString() {
         return id;

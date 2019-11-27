@@ -68,6 +68,11 @@ public class ArithmeticExpression implements Expression {
         else if(operand ==4) return first_expression.toString() + "/" + second_expression.toString();
         else return "INVALID!";
     }
+
+    public Expression deepCopy()
+    {
+        return new ArithmeticExpression( new Integer(operand),first_expression.deepCopy(), second_expression.deepCopy());
+    }
 }
 
 

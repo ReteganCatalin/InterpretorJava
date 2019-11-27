@@ -25,6 +25,11 @@ public class PrintStatement implements IStatement
         MyIList<Value> out=state.getOutput();
         MyIDictionary<String,Value>  symTable=state.getSymbolsTable();
         out.add(expression.eval(symTable,state.getHeapTable() ));
-        return state;
+        return null;
+    }
+
+    public IStatement deepCopy()
+    {
+        return new PrintStatement(expression.deepCopy());
     }
 }

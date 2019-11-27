@@ -26,6 +26,11 @@ public class VariableDeclarationStatement implements IStatement
 
     }
 
+    public IStatement deepCopy()
+    {
+        return new VariableDeclarationStatement(new String(name),typ.deepCopy());
+    }
+
     public ProgramState execute(ProgramState state) throws MyExceptions
     {
         MyIDictionary<String, Value> symTbl = state.getSymbolsTable();
@@ -56,6 +61,6 @@ public class VariableDeclarationStatement implements IStatement
             }
 
         }
-        return state;
+        return null;
     }
 }

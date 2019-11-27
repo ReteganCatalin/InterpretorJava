@@ -45,13 +45,11 @@ public class IfStatement implements IStatement {
                 stack.push(elseS);
             }
         }
-        return state;
+        return null;
     }
-
-    public IfStatement(IfStatement other) {
-        this.expression = other.expression;
-        this.thenS = other.thenS;
-        this.elseS = other.elseS;
+    public IStatement deepCopy()
+    {
+        return new IfStatement(expression.deepCopy(),thenS.deepCopy(),elseS.deepCopy());
     }
 
     public void setExpression(Expression expression) {

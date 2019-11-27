@@ -19,6 +19,11 @@ public class ReadFile implements IStatement {
         expression =express;
         this.val=val;
     }
+
+    public IStatement deepCopy()
+    {
+        return new ReadFile(expression.deepCopy(),new String(val));
+    }
     public ProgramState execute(ProgramState state) throws MyExceptions {
         MyIDictionary<String, BufferedReader> fileTable = state.getFileTable();
         MyIDictionary<String, Value> symTbl = state.getSymbolsTable();
@@ -48,7 +53,7 @@ public class ReadFile implements IStatement {
             }
         }
 
-        return state;
+        return null;
     }
 
     @Override

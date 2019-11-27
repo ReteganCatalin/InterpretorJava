@@ -24,4 +24,9 @@ public class BoolType implements Type {
     {
         return "bool";
     }
+
+    public Type deepCopy()
+    {
+        return new BoolType();
+    }
 }

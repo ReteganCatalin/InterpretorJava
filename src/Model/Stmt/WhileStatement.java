@@ -19,6 +19,12 @@ public class WhileStatement implements IStatement {
 
     }
 
+     @Override
+     public IStatement deepCopy()
+     {
+         return new WhileStatement(expression.deepCopy(),execute_this.deepCopy());
+     }
+
     public String toString() {
         return "while(" + expression.toString()  + ") do:"+execute_this.toString();
     }
@@ -37,7 +43,7 @@ public class WhileStatement implements IStatement {
                 stack.push(execute_this);
             }
         }
-        return state;
+        return null;
     }
 
 

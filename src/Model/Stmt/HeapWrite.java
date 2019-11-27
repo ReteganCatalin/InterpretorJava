@@ -28,7 +28,7 @@ public class HeapWrite implements IStatement {
                 if (Heap.isDefined(address)) {
                     if(expression.eval(symbolTabel, Heap).getType().equals(Heap.lookup(address).getType())) {
                         Heap.update(address,expression.eval(symbolTabel, Heap));
-                        return state;
+                        return null;
                     }
                     else {
                         throw new MyExceptions("Not the same Type");
@@ -46,7 +46,10 @@ public class HeapWrite implements IStatement {
             throw new MyExceptions("The variable is not defined");
 
     }
-
+    public IStatement deepCopy()
+    {
+        return new HeapWrite(new String(variable_name),expression.deepCopy());
+    }
     public String toString() {
         return "HeapWrite (" +variable_name+","+expression.toString() + ')';
     }

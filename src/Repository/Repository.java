@@ -3,7 +3,10 @@ package Repository;
 import Exceptions.MyExceptions;
 import Model.ProgramState;
 
+import java.util.ArrayList;
+
 public interface Repository {
-    ProgramState getCurrentProgram();
-    void logProgramStateExecution() throws MyExceptions;
+    ArrayList<ProgramState> getProgramList();
+    void setProgramStates(ArrayList<ProgramState> new_states);
+    void logProgramStateExecution(ProgramState state) throws MyExceptions;
 }

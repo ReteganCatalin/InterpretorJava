@@ -24,6 +24,11 @@ public class HeapReading implements Expression {
         throw new MyExceptions("Not a reference Value");
     }
 
+    public Expression deepCopy()
+    {
+        return new HeapReading( expression.deepCopy() );
+    }
+
 
     public String toString() {
         return "HeapReading (" + expression.toString() + ')';

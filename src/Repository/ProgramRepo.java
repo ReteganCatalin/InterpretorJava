@@ -11,18 +11,23 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class  ProgramRepo implements  Repository{
-    ArrayList<ProgramState> repo=new ArrayList<ProgramState>();
+    ArrayList<ProgramState> states =new ArrayList<ProgramState>();
     String logFilePath="log.txt";
     @Override
-    public ProgramState getCurrentProgram() {
-        return repo.get(0);
+    public ArrayList<ProgramState> getProgramList() {
+        return states;
     }
 
-    public void logProgramStateExecution() throws MyExceptions
+    public void setProgramStates(ArrayList<ProgramState> new_states)
+    {
+        states=new_states;
+    }
+
+    public void logProgramStateExecution(ProgramState state) throws MyExceptions
     {
         try {
             PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)));
-            logFile.write(repo.get(0).toString());
+            logFile.write(state.toString());
             logFile.close();
         }
         catch(IOException e)
@@ -32,7 +37,7 @@ public class  ProgramRepo implements  Repository{
     }
 
     public ProgramRepo(ProgramState state1,String logFilePath) throws MyExceptions{
-        this.repo.add(state1);
+        this.states.add(state1);
         this.logFilePath=logFilePath;
         try {
             PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath)));

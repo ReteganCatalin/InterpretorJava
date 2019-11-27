@@ -1,0 +1,110 @@
+ProgramState:
+ExeStack:
+{bool a;;{int v;;{a=true;{IF(v) THEN(v=2)ELSE(v=3);print(v)}}}}
+
+SymbolsTable:
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState:
+ExeStack:
+bool a;
+{int v;;{a=true;{IF(v) THEN(v=2)ELSE(v=3);print(v)}}}
+
+SymbolsTable:
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState:
+ExeStack:
+{int v;;{a=true;{IF(v) THEN(v=2)ELSE(v=3);print(v)}}}
+
+SymbolsTable:
+(a=false)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState:
+ExeStack:
+int v;
+{a=true;{IF(v) THEN(v=2)ELSE(v=3);print(v)}}
+
+SymbolsTable:
+(a=false)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState:
+ExeStack:
+{a=true;{IF(v) THEN(v=2)ELSE(v=3);print(v)}}
+
+SymbolsTable:
+(a=false)
+(v=0)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState:
+ExeStack:
+a=true
+{IF(v) THEN(v=2)ELSE(v=3);print(v)}
+
+SymbolsTable:
+(a=false)
+(v=0)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState:
+ExeStack:
+{IF(v) THEN(v=2)ELSE(v=3);print(v)}
+
+SymbolsTable:
+(a=true)
+(v=0)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState:
+ExeStack:
+IF(v) THEN(v=2)ELSE(v=3)
+print(v)
+
+SymbolsTable:
+(a=true)
+(v=0)
+
+Out:
+
+FileTable:
+
+Heap:
+

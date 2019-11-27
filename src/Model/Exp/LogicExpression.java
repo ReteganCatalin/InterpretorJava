@@ -7,14 +7,14 @@ import Model.Value.BoolValue;
 import Model.Value.Value;
 
 public class LogicExpression implements Expression {
-    Expression e1;
-    Expression e2;
-    int op; //1-plus, 2-minus, 3-star, 4-divide
+    Expression first_expression;
+    Expression second_expression;
+    int operand; //1-plus, 2-minus, 3-star, 4-divide
 
     public LogicExpression(int op, Expression e1, Expression e2) {
-        this.e1 = e1;
-        this.e2 = e2;
-        this.op = op;
+        this.first_expression = e1;
+        this.second_expression = e2;
+        this.operand = op;
     }
     //
     // override
@@ -22,17 +22,17 @@ public class LogicExpression implements Expression {
 
     public Value eval(MyIDictionary<String, Value> symbolTable, MyIDictionary<Integer, Value> Heap) throws MyExceptions {
         Value v1, v2;
-        v1 = e1.eval(symbolTable,Heap );
+        v1 = first_expression.eval(symbolTable,Heap );
         if (v1.getType().equals(new BoolType())) {
-            v2 = e2.eval(symbolTable,Heap );
+            v2 = second_expression.eval(symbolTable,Heap );
             if (v2.getType().equals(new BoolType())) {
                 BoolValue i1 = (BoolValue) v1;
                 BoolValue i2 = (BoolValue) v2;
                 boolean b1, b2;
                 b1 = i1.getValue();
                 b2 = i2.getValue();
-                if (op == 1) return new BoolValue(b1 && b2);
-                else if (op == 2) return new BoolValue(b1 || b2);
+                if (operand == 1) return new BoolValue(b1 && b2);
+                else if (operand == 2) return new BoolValue(b1 || b2);
 
             } else
                 throw new MyExceptions("second operand is not a boolean");
@@ -43,8 +43,13 @@ public class LogicExpression implements Expression {
 
     @Override
     public String toString() {
-        if (op == 1) return e1.toString() + "&&" + e2.toString();
-        else if (op == 2) return e1.toString() + "||" + e2.toString();
+        if (operand == 1) return first_expression.toString() + "&&" + second_expression.toString();
+        else if (operand == 2) return first_expression.toString() + "||" + second_expression.toString();
         return "";
+    }
+
+    public Expression deepCopy()
+    {
+        return new LogicExpression(new Integer(operand), first_expression.deepCopy(), second_expression.deepCopy());
     }
 }

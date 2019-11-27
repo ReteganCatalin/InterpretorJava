@@ -25,4 +25,9 @@ public class StringType implements Type {
     {
         return "string";
     }
+
+    @Override
+    public Type deepCopy() {
+        return new StringType();
+    }
 }

@@ -4,4 +4,5 @@ import Model.ProgramState;
 
 public interface IStatement {
     public ProgramState execute(ProgramState state) throws MyExceptions;
+    IStatement deepCopy();
 }

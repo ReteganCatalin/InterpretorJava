@@ -15,14 +15,14 @@ import Model.Value.Value;
 import java.io.BufferedReader;
 
 public class ProgramState {
-    MyIStack<IStatement> statements;
-    MyIDictionary<String, Value> symbolsTable;
-    MyIList<Value> out;
-    MyIDictionary<String, BufferedReader> fileTable;
-    MyIDictionary<Integer, Value> HeapTable;
-    IStatement originalProgram;
+    private MyIStack<IStatement> statements;
+    private MyIDictionary<String, Value> symbolsTable;
+    private MyIList<Value> out;
+    private MyIDictionary<String, BufferedReader> fileTable;
+    private MyIDictionary<Integer, Value> HeapTable;
+    private IStatement originalProgram;
     private int identificator;
-    public static int lastID;
+    private static int lastID;
     public MyIStack<IStatement> getStack()
     {
         return statements;
@@ -35,6 +35,12 @@ public class ProgramState {
             return false;
         return true;
     }
+
+    public int getID()
+    {
+        return identificator;
+    }
+
 
     public ProgramState(IStatement statement) {
         this.statements = new MyStack<IStatement>();

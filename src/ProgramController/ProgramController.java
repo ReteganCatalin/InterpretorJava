@@ -36,6 +36,11 @@ public class ProgramController {
                                 .collect(Collectors.toList()));
     }
 
+    public Repository getRepo()
+    {
+        return repo;
+    }
+
     List<Integer> extractAllValidAddresses()
     {
         Set<Map.Entry<Integer, Value>> heapEntrySet = repo.getProgramList().get(0).getHeapTable().getValues().entrySet();

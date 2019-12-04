@@ -103,8 +103,8 @@ class Interpreter {
                                                     new CompoundStatement(new AssignmentStatement("v", new ValueExpression(new IntValue(32))),
                                                             new CompoundStatement(new PrintStatement(new VariableExpression("v")),
                                                                     new PrintStatement(new HeapReading(new VariableExpression("a"))))))),
-                                                    new CompoundStatement(new PrintStatement(new VariableExpression("v")),
-                                                            new PrintStatement(new HeapReading(new VariableExpression("a")))))))));
+                                                    new CompoundStatement(new AssignmentStatement("v",new ValueExpression(new IntValue(37))) ,new CompoundStatement(new PrintStatement(new VariableExpression("v")),
+                                                            new PrintStatement(new HeapReading(new VariableExpression("a"))))))))));
             ProgramState prg8 = new ProgramState(ex8);
             Repository repo8= new ProgramRepo(prg8, "log8.txt");
             ProgramController ctr8 = new ProgramController(repo8);

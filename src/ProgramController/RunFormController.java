@@ -5,6 +5,7 @@ import Model.ProgramState;
 import Model.Stack.MyIStack;
 import Model.Stmt.IStatement;
 import Model.Value.Value;
+import com.sun.org.apache.bcel.internal.classfile.StackMapEntry;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -129,9 +130,9 @@ public class RunFormController implements Initializable {
     private void populateHeapTable(ProgramState currentProgramState) {
         MyIDictionary<Integer, Value> heapTable = currentProgramState.getHeapTable();
 
-        List<Map.Entry<Integer, Value>> heapTableList = new ArrayList<>();
+        List<Map.Entry<Integer, String>> heapTableList = new ArrayList<>();
         for(HashMap.Entry<Integer, Value> entry : heapTable.getValues())
-            heapTableList.add(entry);
+            heapTableList.add(Map.Entry<entry.getKey(),entry.toString()>);
 
         heapTableView.setItems(FXCollections.observableList(heapTableList));
         heapTableView.refresh();
@@ -155,20 +156,20 @@ public class RunFormController implements Initializable {
     }
 
     private void populateSymbolTable(ProgramState currentProgramState) {
-        MyIDictionary<String, Integer> symbolTable = currentProgramState.getSymbolTable();
+        MyIDictionary<String, Value> symbolTable = currentProgramState.getSymbolsTable();
 
-        List<Map.Entry<String, Integer>> symbolTableList = new ArrayList<>();
-        for(Map.Entry<String, Integer> entry : symbolTable.getAll())
+        List<Map.Entry<String, Value>> symbolTableList = new ArrayList<>();
+        for(Map.Entry<String, Value> entry : symbolTable.getValues().entrySet())
             symbolTableList.add(entry);
         symbolTableView.setItems(FXCollections.observableList(symbolTableList));
         symbolTableView.refresh();
     }
 
     private void populateExecutionStack(ProgramState currentProgramState) {
-        MyIStack<IStatement> executionStack = currentProgramState.getExecutionStack();
+        MyIStack<IStatement> executionStack = currentProgramState.getStack();
 
         List<String> executionStackList = new ArrayList<>();
-        for(IStatement s : executionStack.getAll()){
+        for(IStatement s : executionStack.getStack()){
             executionStackList.add(s.toString());
         }
 
@@ -181,6 +182,6 @@ public class RunFormController implements Initializable {
             return null;
 
         int currentId = programStateListView.getSelectionModel().getSelectedItem();
-        return controller.getRepository().getProgramStateWithId(currentId);
+        return controller.getRepo().getProgramList().get(currentId);
     }
 }

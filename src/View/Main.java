@@ -1,7 +1,5 @@
 package View;
 
-import ProgramController.RunFormController;
-import ProgramController.SelectFormController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,12 +17,12 @@ public class Main extends Application {
         RunFormController mainWindowController = mainLoader.getController();
 
         primaryStage.setTitle("Main Window");
-        primaryStage.setScene(new Scene(mainWindow, 620, 600));
+        primaryStage.setScene(new Scene(mainWindow, 757, 467));
         primaryStage.show();
 
 
         FXMLLoader secondaryLoader = new FXMLLoader();
-        secondaryLoader.setLocation(getClass().getResource("selectForm.fxml"));
+        secondaryLoader.setLocation(getClass().getResource("SelectForm.fxml"));
         Parent secondaryWindow = secondaryLoader.load();
 
         SelectFormController selectWindowController = secondaryLoader.getController();
@@ -32,7 +30,7 @@ public class Main extends Application {
 
         Stage secondaryStage = new Stage();
         secondaryStage.setTitle("Select Window");
-        secondaryStage.setScene(new Scene(secondaryWindow, 500, 550));
+        secondaryStage.setScene(new Scene(secondaryWindow, 712, 404));
         secondaryStage.show();
     }
 

@@ -1,0 +1,26 @@
+ProgramState with id: 3
+ExeStack:
+int v;
+{v=10;while(v>0) do:{print(v);v=v-1}}
+
+SymbolsTable:
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 3
+ExeStack:
+int v;
+{v=10;while(v>0) do:{print(v);v=v-1}}
+
+SymbolsTable:
+
+Out:
+
+FileTable:
+
+Heap:
+

@@ -1,4 +1,4 @@
-package ProgramController;
+package View;
 
 import Exceptions.MyExceptions;
 import Model.Exp.ArithmeticExpression;
@@ -14,9 +14,11 @@ import Model.Type.StringType;
 import Model.Value.BoolValue;
 import Model.Value.IntValue;
 import Model.Value.StringValue;
+import ProgramController.ProgramController;
 import Repository.ProgramRepo;
 import Repository.Repository;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -37,9 +39,9 @@ public class SelectFormController implements Initializable {
     private ListView<String> programListView;
 
     @FXML
-    private Button executeButton;
+    private Button executeProgram;
 
-    public void setMainWindowController(RunFormController mainWindowController){
+    void setMainWindowController(RunFormController mainWindowController){
         this.mainWindowController = mainWindowController;
     }
 
@@ -51,12 +53,11 @@ public class SelectFormController implements Initializable {
                 new CompoundStatement(new VariableDeclarationStatement("b", new IntType()), new CompoundStatement(new AssignmentStatement("a", new ArithmeticExpression(1, new ValueExpression(new IntValue(2))
                         , new ArithmeticExpression(3, new ValueExpression(new IntValue(3)), new ValueExpression(new IntValue(5))))), new CompoundStatement(new AssignmentStatement("b", new ArithmeticExpression(1, new VariableExpression("a"),
                         new ValueExpression(new IntValue(1)))), new PrintStatement(new VariableExpression("b"))))));
-        ;
+
         IStatement ex3 = new CompoundStatement(new VariableDeclarationStatement("a", new BoolType()),
                 new CompoundStatement(new VariableDeclarationStatement("v", new IntType()), new CompoundStatement(new AssignmentStatement("a", new ValueExpression(new BoolValue(true))),
                         new CompoundStatement(new IfStatement(new VariableExpression("v"), new AssignmentStatement("v", new ValueExpression(new IntValue(2))), new AssignmentStatement("v", new ValueExpression(new IntValue(3)))),
                                 new PrintStatement(new VariableExpression("v"))))));
-        ;
         IStatement ex4 = new CompoundStatement(
                 new VariableDeclarationStatement("varf", new StringType()), new CompoundStatement(
                 new AssignmentStatement("varf", new ValueExpression(new StringValue("test.txt"))), new CompoundStatement(
@@ -108,15 +109,17 @@ public class SelectFormController implements Initializable {
         programStatements = new ArrayList<>(Arrays.asList(ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8));}
 
     private List<String> getStringRepresentations(){
-        return programStatements.stream().map(IStatement::toString).collect(Collectors.toList());
+        return programStatements.stream().map(Object::toString).collect(Collectors.toList());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         buildProgramStatements();
-        programListView.setItems(FXCollections.observableArrayList(getStringRepresentations()));
+        List<String> strings=getStringRepresentations();
+        ObservableList<String>  str= FXCollections.observableList(strings);
+        programListView.setItems(str);
 
-        executeButton.setOnAction(actionEvent -> {
+        executeProgram.setOnAction(actionEvent -> {
             int index = programListView.getSelectionModel().getSelectedIndex();
 
             if(index < 0)

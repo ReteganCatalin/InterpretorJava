@@ -24,6 +24,15 @@ public class  ProgramRepo implements  Repository{
         states=new_states;
     }
 
+    public ProgramState getProgramStatewithID(int currentID)
+    {
+        for(ProgramState program : states)
+            if(program.getID() == currentID)
+                return program;
+        return null;
+    }
+
+
     public void logProgramStateExecution(ProgramState state) throws MyExceptions
     {
         try {

@@ -1,14 +1,17 @@
-package ProgramController;
+package View;
 
+import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
 import Model.ProgramState;
 import Model.Stack.MyIStack;
 import Model.Stmt.IStatement;
 import Model.Value.Value;
-import com.sun.org.apache.bcel.internal.classfile.StackMapEntry;
+import ProgramController.ProgramController;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -22,34 +25,28 @@ public class RunFormController implements Initializable {
     private ProgramController controller;
 
     @FXML
-    private TableView<Map.Entry<Integer, Integer>> heapTableView;
+    private TableView<Map.Entry<Integer, Value>> heapTableView;
 
     @FXML
-    private TableColumn<Map.Entry<Integer, Integer>, Integer> heapAddressColumn;
+    private TableColumn<Map.Entry<Integer, Value>, Integer> heapAddressColumn;
 
     @FXML
-    private TableColumn<Map.Entry<Integer, Integer>, Integer> heapValueColumn;
+    private TableColumn<Map.Entry<Integer, Value>, Value> heapValueColumn;
 
     @FXML
-    private TableView<Map.Entry<Integer, String>> fileTableView;
+    private ListView<String> fileListView;
 
     @FXML
-    private TableColumn<Map.Entry<Integer, String>, Integer> fileIdentifierColumn;
-
-    @FXML
-    private TableColumn<Map.Entry<Integer, String>, String> fileNameColumn;
-
-    @FXML
-    private TableView<Map.Entry<String, Integer>> symbolTableView;
+    private TableView<Map.Entry<String, Value>> symbolTableView;
 
     @FXML
     private TableColumn<Map.Entry<String, Integer>, String> symbolTableVariableColumn;
 
     @FXML
-    private TableColumn<Map.Entry<String, Integer>, Integer> symbolTableValueColumn;
+    private TableColumn<Map.Entry<String, Value>, Value> symbolTableValueColumn;
 
     @FXML
-    private ListView<Integer> outputListView;
+    private ListView<Value> outputListView;
 
     @FXML
     private ListView<Integer> programStateListView;
@@ -63,9 +60,22 @@ public class RunFormController implements Initializable {
     @FXML
     private Button executeOneStepButton;
 
-    public void setController(ProgramController controller){
+    void setController(ProgramController controller){
         this.controller = controller;
         populateProgramStateIdentifiers();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle){
+        heapAddressColumn.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getKey()).asObject());
+        heapValueColumn.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getValue()));
+
+        symbolTableVariableColumn.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getKey() + ""));
+        symbolTableValueColumn.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getValue()));
+
+        programStateListView.setOnMouseClicked(mouseEvent -> changeProgramState(getCurrentProgramState()));
+
+        executeOneStepButton.setOnAction(actionEvent -> executeOneStep());
     }
 
     private List<Integer> getProgramStateIds(List<ProgramState> programStateList) {
@@ -79,21 +89,7 @@ public class RunFormController implements Initializable {
         numberOfProgramStatesTextField.setText("" + programStates.size());
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle){
-        heapAddressColumn.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getKey()).asObject());
-        heapValueColumn.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getValue()).asObject());
 
-        fileIdentifierColumn.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getKey()).asObject());
-        fileNameColumn.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getValue() + ""));
-
-        symbolTableVariableColumn.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getKey() + ""));
-        symbolTableValueColumn.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getValue()).asObject());
-
-        programStateListView.setOnMouseClicked(mouseEvent -> { changeProgramState(getCurrentProgramState()); });
-
-        executeOneStepButton.setOnAction(actionEvent -> { executeOneStep(); });
-    }
 
     private void executeOneStep() {
         if(controller == null){
@@ -101,38 +97,46 @@ public class RunFormController implements Initializable {
             alert.showAndWait();
             return;
         }
-
-        boolean programStateLeft = getCurrentProgramState().getStack().isEmpty();
+        boolean programStateLeft = controller.getRepo().getProgramList().isEmpty();
         if(programStateLeft){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Nothing left to execute", ButtonType.OK);
             alert.showAndWait();
             return;
         }
+        try {
+            controller.oneStep();
+        }
+        catch(MyExceptions ignore)
+        {
 
-        controller.executeOneStep();
+        }
 
         changeProgramState(getCurrentProgramState());
+        controller.removeAfterOneStep();
         populateProgramStateIdentifiers();
-
 
     }
 
+
     private void changeProgramState(ProgramState currentProgramState) {
         if(currentProgramState == null)
+        {
             return;
-        populateExecutionStack(currentProgramState);
-        populateSymbolTable(currentProgramState);
-        populateOutput(currentProgramState);
-        populateFileTable(currentProgramState);
-        populateHeapTable(currentProgramState);
+        }
+        else {
+
+                populateExecutionStack(currentProgramState);
+                populateSymbolTable(currentProgramState);
+                populateOutput(currentProgramState);
+                populateFileTable(currentProgramState);
+                populateHeapTable(currentProgramState);
+        }
     }
 
     private void populateHeapTable(ProgramState currentProgramState) {
         MyIDictionary<Integer, Value> heapTable = currentProgramState.getHeapTable();
 
-        List<Map.Entry<Integer, String>> heapTableList = new ArrayList<>();
-        for(HashMap.Entry<Integer, Value> entry : heapTable.getValues())
-            heapTableList.add(Map.Entry<entry.getKey(),entry.toString()>);
+        List<Map.Entry<Integer, Value>> heapTableList = new ArrayList<>(heapTable.getValues().entrySet());
 
         heapTableView.setItems(FXCollections.observableList(heapTableList));
         heapTableView.refresh();
@@ -140,27 +144,25 @@ public class RunFormController implements Initializable {
 
     private void populateFileTable(ProgramState currentProgramState) {
         MyIDictionary<String, BufferedReader> fileTable = currentProgramState.getFileTable();
-        Map<String, BufferedReader> fileTableMap = new HashMap<>();
+        List<String> fileList = new ArrayList<>();
         for (Map.Entry<String, BufferedReader> entry : fileTable.getValues().entrySet())
-            fileTableMap.put(entry.getKey(), entry.getValue());
-
-        List<Map.Entry<String, BufferedReader>> fileTableList = new ArrayList<>(fileTableMap.entrySet());
-        fileTableView.setItems(FXCollections.observableList(fileTableList));
-        fileTableView.refresh();
+            fileList.add(entry.getKey());
+        ObservableList<String> files = FXCollections.observableArrayList(fileList);
+        fileListView.setItems(files);
+        fileListView.refresh();
     }
 
     private void populateOutput(ProgramState currentProgramState) {
-        List<Value> output = currentProgramState.getOutput();
-        outputListView.setItems(FXCollections.observableList(output));
+        ObservableList<Value> output = FXCollections.observableArrayList(currentProgramState.getOutput().getValues());
+
+        outputListView.setItems(output);
         outputListView.refresh();
     }
 
     private void populateSymbolTable(ProgramState currentProgramState) {
         MyIDictionary<String, Value> symbolTable = currentProgramState.getSymbolsTable();
 
-        List<Map.Entry<String, Value>> symbolTableList = new ArrayList<>();
-        for(Map.Entry<String, Value> entry : symbolTable.getValues().entrySet())
-            symbolTableList.add(entry);
+        List<Map.Entry<String, Value>> symbolTableList = new ArrayList<>(symbolTable.getValues().entrySet());
         symbolTableView.setItems(FXCollections.observableList(symbolTableList));
         symbolTableView.refresh();
     }
@@ -170,18 +172,17 @@ public class RunFormController implements Initializable {
 
         List<String> executionStackList = new ArrayList<>();
         for(IStatement s : executionStack.getStack()){
-            executionStackList.add(s.toString());
+            executionStackList.add(0,s.toString());
         }
-
         executionStackListView.setItems(FXCollections.observableList(executionStackList));
         executionStackListView.refresh();
     }
-
     private ProgramState getCurrentProgramState(){
         if(programStateListView.getSelectionModel().getSelectedIndex() == -1)
             return null;
 
         int currentId = programStateListView.getSelectionModel().getSelectedItem();
-        return controller.getRepo().getProgramList().get(currentId);
+        return controller.getRepo().getProgramStatewithID(currentId);
     }
+
 }

@@ -87,6 +87,22 @@ public class ProgramController {
         repo.setProgramStates(list);
     }
 
+    public void oneStep() throws MyExceptions
+    {
+        executor = Executors.newFixedThreadPool(2);
+        List<ProgramState> list = removeCompletedPrograms(repo.getProgramList());
+        if (!list.isEmpty()) {
+            callGarbageCollector();
+            oneStepForAllProgram(list);
+        }
+        repo.getProgramList().forEach(program -> {try {repo.logProgramStateExecution(program);} catch(MyExceptions ignored) {}});
+        executor.shutdownNow();
+        repo.setProgramStates(list);
+    }
+    public void removeAfterOneStep()
+    {
+        repo.setProgramStates(removeCompletedPrograms(repo.getProgramList()));
+    }
     public void oneStepForAllProgram(List<ProgramState> activePrograms) throws MyExceptions{
 
         List<Callable<ProgramState>> callList = activePrograms.stream().map((ProgramState program) -> (Callable<ProgramState>)(() -> {return program.oneStep();}))
@@ -119,11 +135,6 @@ public class ProgramController {
                 .filter(ProgramState::isNotCompleted)
                 .collect(Collectors.toList());
     }
-
-
-
-
-
     public ProgramController(Repository repo) {
         this.repo = repo;
     }

@@ -3,6 +3,7 @@ package Model.List;
 import Exceptions.MyExceptions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyList<T> implements  MyIList<T> {
     ArrayList<T> vector;
@@ -41,6 +42,10 @@ public class MyList<T> implements  MyIList<T> {
     public int size()
     {
         return vector.size();
+    }
+    public List<T> getValues()
+    {
+        return this.vector;
     }
 
     @Override

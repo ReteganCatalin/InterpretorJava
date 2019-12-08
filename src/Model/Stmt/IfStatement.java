@@ -6,6 +6,7 @@ import Model.Exp.Expression;
 import Model.ProgramState;
 import Model.Stack.MyIStack;
 import Model.Type.BoolType;
+import Model.Type.Type;
 import Model.Value.BoolValue;
 import Model.Value.Value;
 
@@ -19,6 +20,19 @@ public class IfStatement implements IStatement {
         thenS=t;
         elseS=el;
     }
+
+    @Override
+    public  MyIDictionary<String,Type> typeCheck(MyIDictionary<String, Type> typeEnv) throws MyExceptions {
+        Type ExpressionType = expression.typeCheck(typeEnv);
+        if (ExpressionType.equals(new BoolType())) {
+            thenS.typeCheck(typeEnv);
+            elseS.typeCheck(typeEnv);
+            return typeEnv;
+        }
+        else
+            throw new MyExceptions("The condition of IF does not have the bool type");
+    }
+    @Override
     public String toString()
     {
         return "IF("+ expression.toString()+") THEN(" +thenS.toString()+")ELSE("+elseS.toString()+")";
@@ -29,14 +43,14 @@ public class IfStatement implements IStatement {
         MyIDictionary<String, Value> symTbl = state.getSymbolsTable();
         MyIDictionary<Integer, Value> heap = state.getHeapTable();
         Value Cond= expression.eval(symTbl,heap );
-        if(Cond.getType().equals(new BoolType())==false)
+        if(!Cond.getType().equals(new BoolType()))
         {
             throw new MyExceptions("No a boolean condition");
         }
         else
         {
             BoolValue BoolCond = (BoolValue) Cond;
-            if(BoolCond.getValue()==true)
+            if(BoolCond.getValue())
             {
                 stack.push(thenS);
             }

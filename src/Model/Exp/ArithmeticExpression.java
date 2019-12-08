@@ -3,7 +3,9 @@ package Model.Exp;
 
 import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
+import Model.Type.BoolType;
 import Model.Type.IntType;
+import Model.Type.Type;
 import Model.Value.BoolValue;
 import Model.Value.IntValue;
 import Model.Value.Value;
@@ -19,10 +21,43 @@ public class ArithmeticExpression implements Expression {
         this.operand = operand;
     }
     //
-    // override
+    @Override
+    public Type typeCheck(MyIDictionary<String,Type> typeEnv) throws MyExceptions {
+        Type first_type, second_type;
+        first_type=first_expression.typeCheck(typeEnv);
+        second_type=second_expression.typeCheck(typeEnv);
+        if (operand<5)
+        {
+           if(first_type.equals(new IntType()))
+            {
+                if(second_type.equals(new IntType()))
+                {
+                    return new IntType();
+                }
+                else
+                    throw new MyExceptions("second operand is not an integer");
+            }
+            else
+                throw new MyExceptions("first operand is not an integer");
+        }
+        else
+        {
+            if(first_type.equals(new IntType()))
+            {
+                if(second_type.equals(new IntType()))
+                {
+                    return new BoolType();
+                }
+                else
+                throw new MyExceptions("second operand is not an integer");
+            }
+            else
+            throw new MyExceptions("first operand is not an integer");
+        }
+    }
 
 
-    public Value eval(MyIDictionary<String, Value> symbolTable, MyIDictionary<Integer, Value> Heap) throws MyExceptions {
+        public Value eval(MyIDictionary<String, Value> symbolTable, MyIDictionary<Integer, Value> Heap) throws MyExceptions {
         Value v1, v2;
         v1 = first_expression.eval(symbolTable,Heap);
         if (v1.getType().equals(new IntType())) {

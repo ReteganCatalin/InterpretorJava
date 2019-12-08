@@ -1,7 +1,10 @@
 package Model.Stmt;
 
+import Exceptions.MyExceptions;
+import Model.Dict.MyIDictionary;
 import Model.ProgramState;
 import Model.Stack.MyIStack;
+import Model.Type.Type;
 
 public class CompoundStatement implements IStatement {
     IStatement first;
@@ -16,6 +19,12 @@ public class CompoundStatement implements IStatement {
     public String toString()
     {
         return "{"+first.toString() + ";" + second.toString()+"}";
+    }
+    @Override
+    public MyIDictionary<String, Type> typeCheck(MyIDictionary<String,Type> typeEnvironment) throws MyExceptions
+    {
+
+        return second.typeCheck(first.typeCheck(typeEnvironment));
     }
 
     public CompoundStatement(IStatement f, IStatement s) {

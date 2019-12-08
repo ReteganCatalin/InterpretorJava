@@ -5,6 +5,7 @@ import Model.Dict.MyIDictionary;
 import Model.Exp.Expression;
 import Model.ProgramState;
 import Model.Type.ReferenceType;
+import Model.Type.Type;
 import Model.Value.ReferenceValue;
 import Model.Value.Value;
 
@@ -15,6 +16,16 @@ public class HeapWrite implements IStatement {
     public HeapWrite(String variable_name,Expression expression) {
         this.expression = expression;
         this.variable_name = variable_name;
+    }
+    @Override
+    public MyIDictionary<String, Type> typeCheck(MyIDictionary<String,Type> typeEnv) throws MyExceptions
+    {
+        Type VariableType = typeEnv.lookup(variable_name);
+        Type ExpressionType = expression.typeCheck(typeEnv);
+        if (VariableType.equals(new ReferenceType(ExpressionType)))
+            return typeEnv;
+        else
+            throw new MyExceptions("Assignment: right hand side and left hand side have different types ");
     }
 
     @Override

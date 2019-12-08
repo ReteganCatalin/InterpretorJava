@@ -1,9 +1,11 @@
 package Model.Stmt;
 
+import Exceptions.MyExceptions;
 import Model.Dict.MyDictionary;
 import Model.Dict.MyIDictionary;
 import Model.List.MyIList;
 import Model.ProgramState;
+import Model.Type.Type;
 import Model.Value.Value;
 
 import java.io.BufferedReader;
@@ -38,6 +40,13 @@ public class ForkStatement implements IStatement {
         new_state.setOut(output);
         return new_state;
     }
+    @Override
+    public  MyIDictionary<String, Type> typeCheck(MyIDictionary<String, Type> typeEnv) throws MyExceptions {
+        forked_statement.typeCheck(typeEnv);
+        return typeEnv;
+    }
+
+
     @Override
     public String toString()
     {

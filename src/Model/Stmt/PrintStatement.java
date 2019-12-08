@@ -1,9 +1,11 @@
 package Model.Stmt;
+
 import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
 import Model.Exp.Expression;
 import Model.List.MyIList;
 import Model.ProgramState;
+import Model.Type.Type;
 import Model.Value.Value;
 
 public class PrintStatement implements IStatement
@@ -26,6 +28,12 @@ public class PrintStatement implements IStatement
         MyIDictionary<String,Value>  symTable=state.getSymbolsTable();
         out.add(expression.eval(symTable,state.getHeapTable() ));
         return null;
+    }
+    @Override
+    public MyIDictionary<String, Type> typeCheck(MyIDictionary<String,Type> typeEnv) throws MyExceptions
+    {
+        Type type = expression.typeCheck(typeEnv);
+        return typeEnv;
     }
 
     public IStatement deepCopy()

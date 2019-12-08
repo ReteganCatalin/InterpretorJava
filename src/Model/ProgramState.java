@@ -63,8 +63,8 @@ public class ProgramState {
         HeapTable = heapTable;
     }
 
-    public void setStatements(MyIStack<IStatement> statements) {
-        this.statements = statements;
+    public IStatement getStatement() {
+        return originalProgram;
     }
 
     public void setSymbolsTable(MyIDictionary<String, Value> symbolsTable) {

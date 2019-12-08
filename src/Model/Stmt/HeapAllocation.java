@@ -4,10 +4,7 @@ import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
 import Model.Exp.Expression;
 import Model.ProgramState;
-import Model.Type.BoolType;
-import Model.Type.IntType;
-import Model.Type.ReferenceType;
-import Model.Type.StringType;
+import Model.Type.*;
 import Model.Value.*;
 
 public class HeapAllocation implements IStatement {
@@ -17,6 +14,16 @@ public class HeapAllocation implements IStatement {
     public HeapAllocation(String variable_name, Expression expression) {
         this.variable_name = variable_name;
         this.expression = expression;
+    }
+    @Override
+    public MyIDictionary<String, Type> typeCheck(MyIDictionary<String,Type> typeEnv) throws MyExceptions
+    {
+        Type typevar = typeEnv.lookup(variable_name);
+        Type typexp = expression.typeCheck(typeEnv);
+        if (typevar.equals(new ReferenceType(typexp)))
+            return typeEnv;
+        else
+            throw new MyExceptions("Assignment: right hand side and left hand side have different types ");
     }
 
     @Override

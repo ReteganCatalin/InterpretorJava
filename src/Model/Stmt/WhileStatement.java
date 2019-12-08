@@ -6,6 +6,7 @@ import Model.Exp.Expression;
 import Model.ProgramState;
 import Model.Stack.MyIStack;
 import Model.Type.BoolType;
+import Model.Type.Type;
 import Model.Value.BoolValue;
 import Model.Value.Value;
 
@@ -17,6 +18,16 @@ public class WhileStatement implements IStatement {
         expression = e;
         this.execute_this=execute_this;
 
+    }
+    @Override
+    public  MyIDictionary<String, Type> typeCheck(MyIDictionary<String, Type> typeEnv) throws MyExceptions {
+        Type ExpressionType = expression.typeCheck(typeEnv);
+        if (ExpressionType.equals(new BoolType())) {
+            execute_this.typeCheck(typeEnv);
+            return typeEnv;
+        }
+        else
+            throw new MyExceptions("The condition of IF has not the type bool");
     }
 
      @Override

@@ -1,6 +1,9 @@
 package Model.Stmt;
 
+import Exceptions.MyExceptions;
+import Model.Dict.MyIDictionary;
 import Model.ProgramState;
+import Model.Type.Type;
 
 public class NopStatement implements IStatement {
     public NopStatement() {
@@ -19,5 +22,10 @@ public class NopStatement implements IStatement {
     @Override
     public String toString() {
         return "";
+    }
+    @Override
+    public MyIDictionary<String, Type> typeCheck(MyIDictionary<String,Type> typeEnv) throws MyExceptions
+    {
+        return typeEnv;
     }
 }

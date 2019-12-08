@@ -106,9 +106,11 @@ public class RunFormController implements Initializable {
         try {
             controller.oneStep();
         }
-        catch(MyExceptions ignore)
+        catch(MyExceptions exception)
         {
-
+            Alert alert = new Alert(Alert.AlertType.ERROR, exception.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+            return;
         }
 
         changeProgramState(getCurrentProgramState());

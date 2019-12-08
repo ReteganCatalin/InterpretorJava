@@ -5,6 +5,7 @@ import Model.Dict.MyIDictionary;
 import Model.Exp.Expression;
 import Model.ProgramState;
 import Model.Type.StringType;
+import Model.Type.Type;
 import Model.Value.StringValue;
 import Model.Value.Value;
 
@@ -43,6 +44,15 @@ public class closeReaderFile implements IStatement {
         }
 
         return null;
+    }
+    @Override
+    public  MyIDictionary<String, Type> typeCheck(MyIDictionary<String, Type> typeEnv) throws MyExceptions {
+        Type ExpressionType = expression.typeCheck(typeEnv);
+        if (ExpressionType.equals(new StringType())) {
+            return typeEnv;
+        }
+        else
+            throw new MyExceptions("The Closing expression type is not a string");
     }
 
     @Override

@@ -1,16 +1,15 @@
 package View;
 
 import Exceptions.MyExceptions;
+import Model.Dict.MyDictionary;
+import Model.Dict.MyIDictionary;
 import Model.Exp.ArithmeticExpression;
 import Model.Exp.HeapReading;
 import Model.Exp.ValueExpression;
 import Model.Exp.VariableExpression;
 import Model.ProgramState;
 import Model.Stmt.*;
-import Model.Type.BoolType;
-import Model.Type.IntType;
-import Model.Type.ReferenceType;
-import Model.Type.StringType;
+import Model.Type.*;
 import Model.Value.BoolValue;
 import Model.Value.IntValue;
 import Model.Value.StringValue;
@@ -21,7 +20,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 
 import java.net.URL;
@@ -126,16 +127,22 @@ public class SelectFormController implements Initializable {
                 return;
 
             ProgramState initialProgramState = new ProgramState(programStatements.get(index));
+
             Repository repository;
             try {
+                index+=1;
+                MyIDictionary<String, Type> typeEnv = new MyDictionary<>();
+                initialProgramState.getStatement().typeCheck(typeEnv);
                 repository = new ProgramRepo(initialProgramState, "log" + index + ".txt");
                 ProgramController ctrl = new ProgramController(repository);
 
                 mainWindowController.setController(ctrl);
             }
-            catch(MyExceptions ignore)
+            catch(MyExceptions exception)
             {
-
+                Alert alert = new Alert(Alert.AlertType.ERROR, exception.getMessage(), ButtonType.OK);
+                alert.showAndWait();
+                return;
             }
 
         });

@@ -2,6 +2,7 @@ package Model.Exp;
 
 import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
+import Model.Type.Type;
 import Model.Value.Value;
 
 public class VariableExpression implements Expression
@@ -10,6 +11,11 @@ public class VariableExpression implements Expression
     public Value eval(MyIDictionary<String, Value> symbolTable, MyIDictionary<Integer, Value> Heap) throws MyExceptions
     {
         return symbolTable.lookup(id);
+    }
+    @Override
+    public Type typeCheck(MyIDictionary<String,Type> typeEnv) throws MyExceptions
+    {
+        return typeEnv.lookup(id);
     }
 
     public VariableExpression(String id) {

@@ -3,6 +3,7 @@ package Model.Exp;
 import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
 import Model.Type.BoolType;
+import Model.Type.Type;
 import Model.Value.BoolValue;
 import Model.Value.Value;
 
@@ -17,8 +18,19 @@ public class LogicExpression implements Expression {
         this.operand = op;
     }
     //
-    // override
-
+    @Override
+    public Type typeCheck(MyIDictionary<String,Type> typeEnv) throws MyExceptions {
+        Type first_type, second_type;
+        first_type = first_expression.typeCheck(typeEnv);
+        second_type = second_expression.typeCheck(typeEnv);
+        if (first_type.equals(new BoolType())) {
+            if (second_type.equals(new BoolType())) {
+                return new BoolType();
+            } else
+                throw new MyExceptions("second operand is not an boolean");
+        } else
+            throw new MyExceptions("first operand is not a boolean");
+    }
 
     public Value eval(MyIDictionary<String, Value> symbolTable, MyIDictionary<Integer, Value> Heap) throws MyExceptions {
         Value v1, v2;

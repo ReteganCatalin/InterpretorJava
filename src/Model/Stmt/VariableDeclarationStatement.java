@@ -11,8 +11,8 @@ import Model.Value.*;
 
 public class VariableDeclarationStatement implements IStatement
 {
-    String name;
-    Type typ;
+    private String name;
+    private Type typ;
 
     public VariableDeclarationStatement(String namer, Type t)
     {
@@ -26,6 +26,13 @@ public class VariableDeclarationStatement implements IStatement
 
     }
 
+    @Override
+    public MyIDictionary<String,Type> typeCheck(MyIDictionary<String,Type> typeEnv) throws MyExceptions
+    {
+        typeEnv.update(name,typ);
+        return typeEnv;
+    }
+
     public IStatement deepCopy()
     {
         return new VariableDeclarationStatement(new String(name),typ.deepCopy());
@@ -34,18 +41,18 @@ public class VariableDeclarationStatement implements IStatement
     public ProgramState execute(ProgramState state) throws MyExceptions
     {
         MyIDictionary<String, Value> symTbl = state.getSymbolsTable();
-        if(symTbl.isDefined(name)==true)
+        if(symTbl.isDefined(name))
         {
             throw new MyExceptions("It is already defined");
         }
         else
         {
-            if(typ.equals(new BoolType())==true)
+            if(typ.equals(new BoolType()))
             {
                 BoolValue bool=(BoolValue) typ.defaultValue();
                 symTbl.update(name,bool);
             }
-            else if(typ.equals(new IntType())==true) {
+            else if(typ.equals(new IntType())) {
                 IntValue inter = (IntValue) typ.defaultValue();
                 symTbl.update(name, inter);
             }

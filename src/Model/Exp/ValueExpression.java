@@ -1,6 +1,8 @@
 package Model.Exp;
 
+import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
+import Model.Type.Type;
 import Model.Value.Value;
 
 public class ValueExpression implements Expression {
@@ -12,6 +14,11 @@ public class ValueExpression implements Expression {
 
     public ValueExpression(Value e) {
         this.e = e;
+    }
+    @Override
+    public Type typeCheck(MyIDictionary<String,Type> typeEnv) throws MyExceptions
+    {
+        return e.getType();
     }
 
     @Override

@@ -95,7 +95,6 @@ public class ProgramController {
             callGarbageCollector();
             oneStepForAllProgram(list);
         }
-        repo.getProgramList().forEach(program -> {try {repo.logProgramStateExecution(program);} catch(MyExceptions ignored) {}});
         executor.shutdownNow();
         repo.setProgramStates(list);
     }
@@ -119,8 +118,8 @@ public class ProgramController {
                     })
                     .filter(state -> state != null)
                     .collect(Collectors.toList());
-        } catch (InterruptedException e) {
-            throw new MyExceptions(e.getMessage());
+        } catch (InterruptedException except) {
+            throw new MyExceptions(except.getMessage());
         }
         activePrograms.addAll(newList);
 

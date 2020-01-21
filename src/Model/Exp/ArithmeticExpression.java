@@ -3,6 +3,7 @@ package Model.Exp;
 
 import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
+import Model.Dict.MyIHeap;
 import Model.Type.BoolType;
 import Model.Type.IntType;
 import Model.Type.Type;
@@ -57,7 +58,7 @@ public class ArithmeticExpression implements Expression {
     }
 
 
-        public Value eval(MyIDictionary<String, Value> symbolTable, MyIDictionary<Integer, Value> Heap) throws MyExceptions {
+        public Value eval(MyIDictionary<String, Value> symbolTable, MyIHeap<Value> Heap) throws MyExceptions {
         Value v1, v2;
         v1 = first_expression.eval(symbolTable,Heap);
         if (v1.getType().equals(new IntType())) {

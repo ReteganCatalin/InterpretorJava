@@ -3,6 +3,7 @@ package Model.Stmt;
 import Exceptions.MyExceptions;
 import Model.Dict.MyDictionary;
 import Model.Dict.MyIDictionary;
+import Model.Dict.MyIHeap;
 import Model.List.MyIList;
 import Model.ProgramState;
 import Model.Type.Type;
@@ -26,7 +27,7 @@ public class ForkStatement implements IStatement {
     public ProgramState execute(ProgramState state)
     {
         MyIDictionary<String, Value> symbolsTable = state.getSymbolsTable();
-        MyIDictionary<Integer, Value> heap = state.getHeapTable();
+        MyIHeap<Value> heap = state.getHeapTable();
         MyIList<Value> output = state.getOutput();
         MyIDictionary<String, BufferedReader> fileTable = state.getFileTable();
         MyDictionary<String, Value> newSymbolsTable = new MyDictionary<String, Value>();

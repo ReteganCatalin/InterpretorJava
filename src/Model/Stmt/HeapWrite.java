@@ -1,7 +1,9 @@
 package Model.Stmt;
 
 import Exceptions.MyExceptions;
+import Model.Dict.Heap;
 import Model.Dict.MyIDictionary;
+import Model.Dict.MyIHeap;
 import Model.Exp.Expression;
 import Model.ProgramState;
 import Model.Type.ReferenceType;
@@ -31,7 +33,7 @@ public class HeapWrite implements IStatement {
     @Override
     public ProgramState execute(ProgramState state) throws MyExceptions {
         MyIDictionary<String, Value> symbolTabel = state.getSymbolsTable();
-        MyIDictionary<Integer,Value> Heap = state.getHeapTable();
+        MyIHeap<Value> Heap = state.getHeapTable();
         if(symbolTabel.isDefined(variable_name)) {
             if(symbolTabel.lookup(variable_name).getType() instanceof ReferenceType) {
                 ReferenceValue referenced_value=(ReferenceValue)symbolTabel.lookup(variable_name);

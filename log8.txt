@@ -1,4 +1,4 @@
-ProgramState with id: 1
+ProgramState with id: 3
 ExeStack:
 int v;
 {Reference(int) a;;{v=10;{new (a,22);{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}}}}
@@ -11,7 +11,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 1
+ProgramState with id: 3
 ExeStack:
 {Reference(int) a;;{v=10;{new (a,22);{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}}}}
 
@@ -24,7 +24,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 1
+ProgramState with id: 3
 ExeStack:
 Reference(int) a;
 {v=10;{new (a,22);{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}}}
@@ -38,7 +38,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 1
+ProgramState with id: 3
 ExeStack:
 {v=10;{new (a,22);{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}}}
 
@@ -52,7 +52,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 1
+ProgramState with id: 3
 ExeStack:
 v=10
 {new (a,22);{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}}
@@ -67,7 +67,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 1
+ProgramState with id: 3
 ExeStack:
 {new (a,22);{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}}
 
@@ -81,7 +81,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 1
+ProgramState with id: 3
 ExeStack:
 new (a,22)
 {fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}
@@ -96,7 +96,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 1
+ProgramState with id: 3
 ExeStack:
 {fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}
 
@@ -111,7 +111,7 @@ FileTable:
 Heap:
 (1->22)
 
-ProgramState with id: 1
+ProgramState with id: 3
 ExeStack:
 fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}})
 {v=37;{print(v);print(HeapReading (a))}}
@@ -127,7 +127,7 @@ FileTable:
 Heap:
 (1->22)
 
-ProgramState with id: 1
+ProgramState with id: 3
 ExeStack:
 {v=37;{print(v);print(HeapReading (a))}}
 
@@ -142,7 +142,7 @@ FileTable:
 Heap:
 (1->22)
 
-ProgramState with id: 2
+ProgramState with id: 4
 ExeStack:
 {HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}}
 
@@ -157,7 +157,7 @@ FileTable:
 Heap:
 (1->22)
 
-ProgramState with id: 1
+ProgramState with id: 3
 ExeStack:
 v=37
 {print(v);print(HeapReading (a))}
@@ -173,7 +173,7 @@ FileTable:
 Heap:
 (1->22)
 
-ProgramState with id: 2
+ProgramState with id: 4
 ExeStack:
 HeapWrite (a,30)
 {v=32;{print(v);print(HeapReading (a))}}
@@ -189,7 +189,7 @@ FileTable:
 Heap:
 (1->22)
 
-ProgramState with id: 1
+ProgramState with id: 3
 ExeStack:
 {print(v);print(HeapReading (a))}
 
@@ -204,7 +204,7 @@ FileTable:
 Heap:
 (1->30)
 
-ProgramState with id: 2
+ProgramState with id: 4
 ExeStack:
 {v=32;{print(v);print(HeapReading (a))}}
 
@@ -219,7 +219,7 @@ FileTable:
 Heap:
 (1->30)
 
-ProgramState with id: 1
+ProgramState with id: 3
 ExeStack:
 print(v)
 print(HeapReading (a))
@@ -235,7 +235,7 @@ FileTable:
 Heap:
 (1->30)
 
-ProgramState with id: 2
+ProgramState with id: 4
 ExeStack:
 v=32
 {print(v);print(HeapReading (a))}
@@ -251,7 +251,7 @@ FileTable:
 Heap:
 (1->30)
 
-ProgramState with id: 1
+ProgramState with id: 3
 ExeStack:
 print(HeapReading (a))
 
@@ -267,7 +267,7 @@ FileTable:
 Heap:
 (1->30)
 
-ProgramState with id: 2
+ProgramState with id: 4
 ExeStack:
 {print(v);print(HeapReading (a))}
 
@@ -283,7 +283,7 @@ FileTable:
 Heap:
 (1->30)
 
-ProgramState with id: 1
+ProgramState with id: 3
 ExeStack:
 
 SymbolsTable:
@@ -299,7 +299,7 @@ FileTable:
 Heap:
 (1->30)
 
-ProgramState with id: 2
+ProgramState with id: 4
 ExeStack:
 print(v)
 print(HeapReading (a))
@@ -317,7 +317,7 @@ FileTable:
 Heap:
 (1->30)
 
-ProgramState with id: 2
+ProgramState with id: 4
 ExeStack:
 print(HeapReading (a))
 
@@ -335,7 +335,7 @@ FileTable:
 Heap:
 (1->30)
 
-ProgramState with id: 2
+ProgramState with id: 4
 ExeStack:
 
 SymbolsTable:

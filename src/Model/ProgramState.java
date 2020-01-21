@@ -1,10 +1,7 @@
 package Model;
 
 import Exceptions.MyExceptions;
-import Model.Dict.FileTable;
-import Model.Dict.Heap;
-import Model.Dict.MyDictionary;
-import Model.Dict.MyIDictionary;
+import Model.Dict.*;
 import Model.List.MyIList;
 import Model.List.MyList;
 import Model.Stack.MyIStack;
@@ -19,7 +16,7 @@ public class ProgramState {
     private MyIDictionary<String, Value> symbolsTable;
     private MyIList<Value> out;
     private MyIDictionary<String, BufferedReader> fileTable;
-    private MyIDictionary<Integer, Value> HeapTable;
+    private MyIHeap<Value>  HeapTable;
     private IStatement originalProgram;
     private int identificator;
     private static int lastID;
@@ -47,7 +44,7 @@ public class ProgramState {
         this.symbolsTable = new MyDictionary<String, Value>();
         this.out = new MyList<Value>();
         this.fileTable=new FileTable<String,BufferedReader>();
-        this.HeapTable=new Heap<Integer, Value>();
+        this.HeapTable=new Heap<Value>();
         originalProgram=statement;
         statements.push(statement);
         identificator=getnewID();
@@ -55,11 +52,11 @@ public class ProgramState {
     }
 
 
-    public MyIDictionary<Integer, Value> getHeapTable() {
+    public MyIHeap <Value> getHeapTable() {
         return HeapTable;
     }
 
-    public void setHeapTable(MyIDictionary<Integer, Value> heapTable) {
+    public void setHeapTable(MyIHeap <Value> heapTable) {
         HeapTable = heapTable;
     }
 

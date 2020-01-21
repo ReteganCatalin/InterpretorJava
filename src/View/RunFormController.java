@@ -2,6 +2,7 @@ package View;
 
 import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
+import Model.Dict.MyIHeap;
 import Model.ProgramState;
 import Model.Stack.MyIStack;
 import Model.Stmt.IStatement;
@@ -136,7 +137,7 @@ public class RunFormController implements Initializable {
     }
 
     private void populateHeapTable(ProgramState currentProgramState) {
-        MyIDictionary<Integer, Value> heapTable = currentProgramState.getHeapTable();
+        MyIHeap<Value> heapTable = currentProgramState.getHeapTable();
 
         List<Map.Entry<Integer, Value>> heapTableList = new ArrayList<>(heapTable.getValues().entrySet());
 

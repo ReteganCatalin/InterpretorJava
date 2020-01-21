@@ -2,6 +2,7 @@ package Model.Stmt;
 
 import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
+import Model.Dict.MyIHeap;
 import Model.Exp.Expression;
 import Model.ProgramState;
 import Model.Type.*;
@@ -33,9 +34,8 @@ public class HeapAllocation implements IStatement {
     @Override
     public synchronized ProgramState execute(ProgramState state) throws MyExceptions{
         MyIDictionary<String, Value> symbolTabel = state.getSymbolsTable();
-        MyIDictionary<Integer, Value> Heap = state.getHeapTable();
+        MyIHeap<Value> Heap= state.getHeapTable();
         if (symbolTabel.isDefined(variable_name)) {
-
             if (symbolTabel.lookup(variable_name).getType() instanceof  ReferenceType) {
                 Value expression_value =  expression.eval(symbolTabel,Heap );
                 ReferenceType referenced=(ReferenceType)symbolTabel.lookup(variable_name).getType();

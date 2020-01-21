@@ -107,7 +107,14 @@ public class SelectFormController implements Initializable {
                                                                 new PrintStatement(new HeapReading(new VariableExpression("a"))))))),
                                                 new CompoundStatement(new AssignmentStatement("v",new ValueExpression(new IntValue(37))) ,new CompoundStatement(new PrintStatement(new VariableExpression("v")),
                                                         new PrintStatement(new HeapReading(new VariableExpression("a"))))))))));
-        programStatements = new ArrayList<>(Arrays.asList(ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8));}
+        IStatement ex9 = new CompoundStatement(new VariableDeclarationStatement("b", new BoolType()),
+                new CompoundStatement(new VariableDeclarationStatement("c", new IntType()),
+                        new CompoundStatement(new AssignmentStatement("b", new ValueExpression(new BoolValue(true))),
+                                new CompoundStatement(new ConditionalAssigment(new VariableExpression("b"),"c", new ValueExpression(new IntValue(100)),new ValueExpression(new IntValue(200))),
+                                        new CompoundStatement(new PrintStatement(new VariableExpression("c")),
+                                                new CompoundStatement(new ConditionalAssigment(new ValueExpression(new BoolValue(false)),"c", new ValueExpression(new IntValue(100)),new ValueExpression(new IntValue(200))),
+                                                        new PrintStatement(new VariableExpression("c"))))))));
+        programStatements = new ArrayList<>(Arrays.asList(ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8,ex9));}
 
     private List<String> getStringRepresentations(){
         return programStatements.stream().map(Object::toString).collect(Collectors.toList());

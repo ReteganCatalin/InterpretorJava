@@ -1,7 +1,9 @@
 package Model.Exp;
 
 import Exceptions.MyExceptions;
+import Model.Dict.Heap;
 import Model.Dict.MyIDictionary;
+import Model.Dict.MyIHeap;
 import Model.Type.ReferenceType;
 import Model.Type.Type;
 import Model.Value.ReferenceValue;
@@ -15,7 +17,7 @@ public class HeapReading implements Expression {
     }
 
     @Override
-    public Value eval(MyIDictionary<String, Value> symbolTable, MyIDictionary<Integer, Value> Heap) throws MyExceptions {
+    public Value eval(MyIDictionary<String, Value> symbolTable, MyIHeap <Value>Heap) throws MyExceptions {
 
         if(expression.eval(symbolTable,Heap) instanceof ReferenceValue)
         {

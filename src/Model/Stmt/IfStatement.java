@@ -3,6 +3,7 @@ package Model.Stmt;
 import Exceptions.MyExceptions;
 import Model.Dict.MyDictionary;
 import Model.Dict.MyIDictionary;
+import Model.Dict.MyIHeap;
 import Model.Exp.Expression;
 import Model.ProgramState;
 import Model.Stack.MyIStack;
@@ -49,7 +50,7 @@ public class IfStatement implements IStatement {
     {
         MyIStack<IStatement> stack=state.getStack();
         MyIDictionary<String, Value> symTbl = state.getSymbolsTable();
-        MyIDictionary<Integer, Value> heap = state.getHeapTable();
+        MyIHeap<Value> heap = state.getHeapTable();
         Value Cond= expression.eval(symTbl,heap );
         if(!Cond.getType().equals(new BoolType()))
         {

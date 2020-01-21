@@ -2,6 +2,7 @@ package Model.Stmt;
 
 import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
+import Model.Dict.MyIHeap;
 import Model.Exp.Expression;
 import Model.ProgramState;
 import Model.Type.StringType;
@@ -21,7 +22,7 @@ public class closeReaderFile implements IStatement {
     {
         MyIDictionary<String, BufferedReader> fileTable = state.getFileTable();
         MyIDictionary<String, Value> symTbl = state.getSymbolsTable();
-        MyIDictionary<Integer, Value> heap = state.getHeapTable();
+        MyIHeap<Value> heap = state.getHeapTable();
         if (expression.eval(symTbl,heap ).getType().equals(new StringType()))
         {
             StringValue file_name=(StringValue) expression.eval(symTbl,heap );

@@ -1,0 +1,188 @@
+ProgramState with id: 6
+ExeStack:
+bool b;
+{int c;;{b=true;{IF(b) THEN(c=100)ELSE(c=200);{print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}}}}
+
+SymbolsTable:
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 6
+ExeStack:
+{int c;;{b=true;{IF(b) THEN(c=100)ELSE(c=200);{print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}}}}
+
+SymbolsTable:
+(b=false)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 6
+ExeStack:
+int c;
+{b=true;{IF(b) THEN(c=100)ELSE(c=200);{print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}}}
+
+SymbolsTable:
+(b=false)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 6
+ExeStack:
+{b=true;{IF(b) THEN(c=100)ELSE(c=200);{print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}}}
+
+SymbolsTable:
+(b=false)
+(c=0)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 6
+ExeStack:
+b=true
+{IF(b) THEN(c=100)ELSE(c=200);{print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}}
+
+SymbolsTable:
+(b=false)
+(c=0)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 6
+ExeStack:
+{IF(b) THEN(c=100)ELSE(c=200);{print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}}
+
+SymbolsTable:
+(b=true)
+(c=0)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 6
+ExeStack:
+IF(b) THEN(c=100)ELSE(c=200)
+{print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}
+
+SymbolsTable:
+(b=true)
+(c=0)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 6
+ExeStack:
+{print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}
+
+SymbolsTable:
+(b=true)
+(c=100)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 6
+ExeStack:
+print(c)
+{IF(false) THEN(c=100)ELSE(c=200);print(c)}
+
+SymbolsTable:
+(b=true)
+(c=100)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 6
+ExeStack:
+{IF(false) THEN(c=100)ELSE(c=200);print(c)}
+
+SymbolsTable:
+(b=true)
+(c=100)
+
+Out:
+100
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 6
+ExeStack:
+IF(false) THEN(c=100)ELSE(c=200)
+print(c)
+
+SymbolsTable:
+(b=true)
+(c=100)
+
+Out:
+100
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 6
+ExeStack:
+print(c)
+
+SymbolsTable:
+(b=true)
+(c=200)
+
+Out:
+100
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 6
+ExeStack:
+
+SymbolsTable:
+(b=true)
+(c=200)
+
+Out:
+100
+200
+
+FileTable:
+
+Heap:
+

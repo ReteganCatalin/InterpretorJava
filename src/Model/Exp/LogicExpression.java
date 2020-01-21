@@ -2,6 +2,7 @@ package Model.Exp;
 
 import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
+import Model.Dict.MyIHeap;
 import Model.Type.BoolType;
 import Model.Type.Type;
 import Model.Value.BoolValue;
@@ -32,7 +33,7 @@ public class LogicExpression implements Expression {
             throw new MyExceptions("first operand is not a boolean");
     }
 
-    public Value eval(MyIDictionary<String, Value> symbolTable, MyIDictionary<Integer, Value> Heap) throws MyExceptions {
+    public Value eval(MyIDictionary<String, Value> symbolTable, MyIHeap<Value> Heap) throws MyExceptions {
         Value v1, v2;
         v1 = first_expression.eval(symbolTable,Heap );
         if (v1.getType().equals(new BoolType())) {

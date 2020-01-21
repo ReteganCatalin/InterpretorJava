@@ -16,6 +16,7 @@ import Model.Value.StringValue;
 import ProgramController.ProgramController;
 import Repository.ProgramRepo;
 import Repository.Repository;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 class Interpreter {
     public static void main(String[] args) {
@@ -119,6 +120,18 @@ class Interpreter {
             ProgramState prg8 = new ProgramState(ex8);
             Repository repo8= new ProgramRepo(prg8, "log8.txt");
             ProgramController ctr8 = new ProgramController(repo8);
+            IStatement ex9 = new CompoundStatement(new VariableDeclarationStatement("b", new BoolType()),
+                    new CompoundStatement(new VariableDeclarationStatement("c", new IntType()),
+                            new CompoundStatement(new AssignmentStatement("b", new ValueExpression(new BoolValue(true))),
+                                    new CompoundStatement(new ConditionalAssigment(new VariableExpression("b"),"c", new ValueExpression(new IntValue(100)),new ValueExpression(new IntValue(200))),
+                                            new CompoundStatement(new PrintStatement(new VariableExpression("c")),
+                                                    new CompoundStatement(new ConditionalAssigment(new ValueExpression(new BoolValue(false)),"c", new ValueExpression(new IntValue(100)),new ValueExpression(new IntValue(200))),
+                                                            new PrintStatement(new VariableExpression("c"))))))));
+            MyIDictionary<String, Type> typeEnv9 = new MyDictionary<>();
+            ex8.typeCheck(typeEnv9);
+            ProgramState prg9 = new ProgramState(ex8);
+            Repository repo9= new ProgramRepo(prg8, "log8.txt");
+            ProgramController ctr9 = new ProgramController(repo8);
             TextMenu menu = new TextMenu();
             menu.addCommand(new ExitCommand("0", "exit"));
             menu.addCommand(new RunCommand("1", ex1.toString(), ctr1));

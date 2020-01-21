@@ -12,11 +12,11 @@ public class ReferenceValue implements Value {
         this.locationType = locationType;
     }
 
-    public void setAddress(int address) {
+    public synchronized void setAddress(int address) {
         this.address = address;
     }
 
-    public int getAddress()
+    public synchronized int getAddress()
     {
         return address;
     }

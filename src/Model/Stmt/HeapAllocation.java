@@ -40,16 +40,6 @@ public class HeapAllocation implements IStatement {
                 Value expression_value =  expression.eval(symbolTabel,Heap );
                 ReferenceType referenced=(ReferenceType)symbolTabel.lookup(variable_name).getType();
                 if(referenced.getReferencedType().equals(expression_value.getType())) {
-                    Boolean found=false;
-                    int index=1;
-                    while(!found) {
-                        if(Heap.isDefined(index)) {
-                            index++;
-                        }
-                        else {
-                            found=true;
-                        }
-                    }
                     Value new_reference;
                     if (referenced.getReferencedType() instanceof IntType)
                         new_reference=new IntValue(((IntValue) expression_value).getValue()) ;
@@ -59,9 +49,9 @@ public class HeapAllocation implements IStatement {
                         new_reference=new StringValue(((StringValue) expression_value).getValue()) ;
                     else
                         new_reference=new ReferenceValue(((ReferenceValue) expression_value).getAddress(),((ReferenceValue) expression_value).getLocationType());
-                    Heap.update(index,new_reference);
+                    int address=Heap.allocate(new_reference);
                     ReferenceValue ref_value= (ReferenceValue)symbolTabel.lookup(variable_name);
-                    ref_value.setAddress(index);
+                    ref_value.setAddress(address);
                 }
                 else
                     {

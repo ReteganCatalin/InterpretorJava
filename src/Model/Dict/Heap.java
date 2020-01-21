@@ -33,6 +33,7 @@ public class Heap<V> implements MyIHeap<V> {
 
     public Heap() {
         this.dictionary = new ConcurrentHashMap<Integer,V>();
+        this.freeLocation=new AtomicInteger(0);
     }
 
     public String toString() {

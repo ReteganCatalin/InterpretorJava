@@ -7,10 +7,7 @@ import Model.Value.Value;
 import Repository.Repository;
 
 import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -66,7 +63,7 @@ public class ProgramController {
 
     void callGarbageCollector()
     {
-        repo.getProgramList().get(0).getHeapTable().setValues((HashMap)safeGarbageCollector(extractAllValidAddresses(),repo.getProgramList().get(0).getHeapTable().getValues()));
+        repo.getProgramList().get(0).getHeapTable().setValues(safeGarbageCollector(extractAllValidAddresses(),repo.getProgramList().get(0).getHeapTable().getValues()));
     }
 
 
@@ -112,7 +109,16 @@ public class ProgramController {
                     .map(future -> {
                         try {
                             return future.get();
-                        } catch (InterruptedException | ExecutionException ignored) {
+                        } catch (InterruptedException ignored) {
+                            return null;
+                        }
+                        catch (ExecutionException exception)
+                        {
+                            if (exception.getCause() instanceof MyExceptions)
+                            {
+                                MyExceptions myException = (MyExceptions) exception.getCause();
+                                repo.logExceptions(myException);
+                            }
                             return null;
                         }
                     })
@@ -125,6 +131,7 @@ public class ProgramController {
 
         activePrograms.forEach(program -> {try {repo.logProgramStateExecution(program);} catch(MyExceptions ignored) {}});
         repo.setProgramStates(activePrograms);
+        repo.ifException();
 
     }
 

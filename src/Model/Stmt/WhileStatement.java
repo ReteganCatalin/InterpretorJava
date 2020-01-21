@@ -1,6 +1,7 @@
 package Model.Stmt;
 
 import Exceptions.MyExceptions;
+import Model.Dict.MyDictionary;
 import Model.Dict.MyIDictionary;
 import Model.Exp.Expression;
 import Model.ProgramState;
@@ -9,6 +10,8 @@ import Model.Type.BoolType;
 import Model.Type.Type;
 import Model.Value.BoolValue;
 import Model.Value.Value;
+
+import java.util.Map;
 
 public class WhileStatement implements IStatement {
     Expression expression;
@@ -23,7 +26,11 @@ public class WhileStatement implements IStatement {
     public  MyIDictionary<String, Type> typeCheck(MyIDictionary<String, Type> typeEnv) throws MyExceptions {
         Type ExpressionType = expression.typeCheck(typeEnv);
         if (ExpressionType.equals(new BoolType())) {
-            execute_this.typeCheck(typeEnv);
+            MyDictionary<String, Type> newEnv=new MyDictionary<>();
+            for (Map.Entry<String, Type> entry: typeEnv.getValues().entrySet()) {
+                newEnv.update(entry.getKey(), entry.getValue().deepCopy());
+            }
+            execute_this.typeCheck(newEnv);
             return typeEnv;
         }
         else

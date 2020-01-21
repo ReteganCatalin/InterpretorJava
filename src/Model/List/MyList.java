@@ -2,14 +2,14 @@ package Model.List;
 
 import Exceptions.MyExceptions;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class MyList<T> implements  MyIList<T> {
-    ArrayList<T> vector;
+    Vector<T> vector;
 
     public MyList() {
-        vector=new ArrayList<T>();
+        vector=new Vector<T>();
     }
 
     public void add(T item)

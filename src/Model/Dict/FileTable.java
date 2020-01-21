@@ -4,9 +4,11 @@ import Exceptions.MyExceptions;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class FileTable<K,V> implements  MyIDictionary<K,V> {
-    HashMap<K,V> dictionary;
+    Map<K,V> dictionary;
     public V lookup(K key) throws MyExceptions
     {
         try {
@@ -33,7 +35,7 @@ public class FileTable<K,V> implements  MyIDictionary<K,V> {
     }
 
     public FileTable() {
-        this.dictionary = new HashMap<K,V>();
+        this.dictionary = new ConcurrentHashMap<K,V>();
     }
 
     public String toString() {
@@ -47,11 +49,11 @@ public class FileTable<K,V> implements  MyIDictionary<K,V> {
         }
         return content.toString();
     }
-    public void setValues(HashMap<K,V> new_values)
+    public void setValues(Map<K,V> new_values)
     {
         this.dictionary=new_values;
     }
-    public HashMap<K, V> getValues() {
+    public Map<K, V> getValues() {
         return dictionary;
     }
 }

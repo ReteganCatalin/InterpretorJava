@@ -39,7 +39,7 @@ class Interpreter {
             ProgramController ctr2 = new ProgramController(repo2);
             IStatement ex3 = new CompoundStatement(new VariableDeclarationStatement("a", new BoolType()),
                     new CompoundStatement(new VariableDeclarationStatement("v", new IntType()), new CompoundStatement(new AssignmentStatement("a", new ValueExpression(new BoolValue(true))),
-                            new CompoundStatement(new IfStatement(new VariableExpression("a"), new AssignmentStatement("v", new ValueExpression(new IntValue(2))), new AssignmentStatement("v", new ValueExpression(new IntValue(3)))),
+                            new CompoundStatement(new IfStatement(new VariableExpression("v"), new AssignmentStatement("v", new ValueExpression(new IntValue(2))), new AssignmentStatement("v", new ValueExpression(new IntValue(3)))),
                                     new PrintStatement(new VariableExpression("v"))))));
             MyIDictionary<String, Type> typeEnv3 = new MyDictionary<>();
             ex3.typeCheck(typeEnv3);

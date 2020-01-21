@@ -54,7 +54,7 @@ public class SelectFormController implements Initializable {
                 new CompoundStatement(new VariableDeclarationStatement("b", new IntType()), new CompoundStatement(new AssignmentStatement("a", new ArithmeticExpression(1, new ValueExpression(new IntValue(2))
                         , new ArithmeticExpression(3, new ValueExpression(new IntValue(3)), new ValueExpression(new IntValue(5))))), new CompoundStatement(new AssignmentStatement("b", new ArithmeticExpression(1, new VariableExpression("a"),
                         new ValueExpression(new IntValue(1)))), new PrintStatement(new VariableExpression("b"))))));
-
+        // example with error that the typechecker will catch
         IStatement ex3 = new CompoundStatement(new VariableDeclarationStatement("a", new BoolType()),
                 new CompoundStatement(new VariableDeclarationStatement("v", new IntType()), new CompoundStatement(new AssignmentStatement("a", new ValueExpression(new BoolValue(true))),
                         new CompoundStatement(new IfStatement(new VariableExpression("v"), new AssignmentStatement("v", new ValueExpression(new IntValue(2))), new AssignmentStatement("v", new ValueExpression(new IntValue(3)))),

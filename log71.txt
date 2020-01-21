@@ -13,7 +13,47 @@ Heap:
 
 ProgramState with id: 1
 ExeStack:
+int v;
 {Reference(int) a;;{v=10;{new (a,22);{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}}}}
+
+SymbolsTable:
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 1
+ExeStack:
+{Reference(int) a;;{v=10;{new (a,22);{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}}}}
+
+SymbolsTable:
+(v=0)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 1
+ExeStack:
+{Reference(int) a;;{v=10;{new (a,22);{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}}}}
+
+SymbolsTable:
+(v=0)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 1
+ExeStack:
+Reference(int) a;
+{v=10;{new (a,22);{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}}}
 
 SymbolsTable:
 (v=0)
@@ -54,6 +94,35 @@ Heap:
 
 ProgramState with id: 1
 ExeStack:
+{v=10;{new (a,22);{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}}}
+
+SymbolsTable:
+(a=(0,int))
+(v=0)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 1
+ExeStack:
+v=10
+{new (a,22);{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}}
+
+SymbolsTable:
+(a=(0,int))
+(v=0)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 1
+ExeStack:
 v=10
 {new (a,22);{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}}
 
@@ -70,6 +139,35 @@ Heap:
 ProgramState with id: 1
 ExeStack:
 {new (a,22);{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}}
+
+SymbolsTable:
+(a=(0,int))
+(v=10)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 1
+ExeStack:
+{new (a,22);{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}}
+
+SymbolsTable:
+(a=(0,int))
+(v=10)
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 1
+ExeStack:
+new (a,22)
+{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}
 
 SymbolsTable:
 (a=(0,int))
@@ -113,8 +211,69 @@ Heap:
 
 ProgramState with id: 1
 ExeStack:
+{fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}});{v=37;{print(v);print(HeapReading (a))}}}
+
+SymbolsTable:
+(a=(1,int))
+(v=10)
+
+Out:
+
+FileTable:
+
+Heap:
+(1->22)
+
+ProgramState with id: 1
+ExeStack:
 fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}})
 {v=37;{print(v);print(HeapReading (a))}}
+
+SymbolsTable:
+(a=(1,int))
+(v=10)
+
+Out:
+
+FileTable:
+
+Heap:
+(1->22)
+
+ProgramState with id: 1
+ExeStack:
+fork({HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}})
+{v=37;{print(v);print(HeapReading (a))}}
+
+SymbolsTable:
+(a=(1,int))
+(v=10)
+
+Out:
+
+FileTable:
+
+Heap:
+(1->22)
+
+ProgramState with id: 1
+ExeStack:
+{v=37;{print(v);print(HeapReading (a))}}
+
+SymbolsTable:
+(a=(1,int))
+(v=10)
+
+Out:
+
+FileTable:
+
+Heap:
+(1->22)
+
+ProgramState with id: 2
+ExeStack:
+{HeapWrite (a,30);{v=32;{print(v);print(HeapReading (a))}}}
 
 SymbolsTable:
 (a=(1,int))
@@ -191,6 +350,38 @@ Heap:
 
 ProgramState with id: 1
 ExeStack:
+v=37
+{print(v);print(HeapReading (a))}
+
+SymbolsTable:
+(a=(1,int))
+(v=10)
+
+Out:
+
+FileTable:
+
+Heap:
+(1->22)
+
+ProgramState with id: 2
+ExeStack:
+HeapWrite (a,30)
+{v=32;{print(v);print(HeapReading (a))}}
+
+SymbolsTable:
+(a=(1,int))
+(v=10)
+
+Out:
+
+FileTable:
+
+Heap:
+(1->22)
+
+ProgramState with id: 1
+ExeStack:
 {print(v);print(HeapReading (a))}
 
 SymbolsTable:
@@ -207,6 +398,68 @@ Heap:
 ProgramState with id: 2
 ExeStack:
 {v=32;{print(v);print(HeapReading (a))}}
+
+SymbolsTable:
+(a=(1,int))
+(v=10)
+
+Out:
+
+FileTable:
+
+Heap:
+(1->30)
+
+ProgramState with id: 1
+ExeStack:
+{print(v);print(HeapReading (a))}
+
+SymbolsTable:
+(a=(1,int))
+(v=37)
+
+Out:
+
+FileTable:
+
+Heap:
+(1->30)
+
+ProgramState with id: 2
+ExeStack:
+{v=32;{print(v);print(HeapReading (a))}}
+
+SymbolsTable:
+(a=(1,int))
+(v=10)
+
+Out:
+
+FileTable:
+
+Heap:
+(1->30)
+
+ProgramState with id: 1
+ExeStack:
+print(v)
+print(HeapReading (a))
+
+SymbolsTable:
+(a=(1,int))
+(v=37)
+
+Out:
+
+FileTable:
+
+Heap:
+(1->30)
+
+ProgramState with id: 2
+ExeStack:
+v=32
+{print(v);print(HeapReading (a))}
 
 SymbolsTable:
 (a=(1,int))
@@ -285,6 +538,72 @@ Heap:
 
 ProgramState with id: 1
 ExeStack:
+print(HeapReading (a))
+
+SymbolsTable:
+(a=(1,int))
+(v=37)
+
+Out:
+37
+
+FileTable:
+
+Heap:
+(1->30)
+
+ProgramState with id: 2
+ExeStack:
+{print(v);print(HeapReading (a))}
+
+SymbolsTable:
+(a=(1,int))
+(v=32)
+
+Out:
+37
+
+FileTable:
+
+Heap:
+(1->30)
+
+ProgramState with id: 1
+ExeStack:
+
+SymbolsTable:
+(a=(1,int))
+(v=37)
+
+Out:
+37
+30
+
+FileTable:
+
+Heap:
+(1->30)
+
+ProgramState with id: 2
+ExeStack:
+print(v)
+print(HeapReading (a))
+
+SymbolsTable:
+(a=(1,int))
+(v=32)
+
+Out:
+37
+30
+
+FileTable:
+
+Heap:
+(1->30)
+
+ProgramState with id: 1
+ExeStack:
 
 SymbolsTable:
 (a=(1,int))
@@ -329,6 +648,42 @@ Out:
 37
 30
 32
+
+FileTable:
+
+Heap:
+(1->30)
+
+ProgramState with id: 2
+ExeStack:
+print(HeapReading (a))
+
+SymbolsTable:
+(a=(1,int))
+(v=32)
+
+Out:
+37
+30
+32
+
+FileTable:
+
+Heap:
+(1->30)
+
+ProgramState with id: 2
+ExeStack:
+
+SymbolsTable:
+(a=(1,int))
+(v=32)
+
+Out:
+37
+30
+32
+30
 
 FileTable:
 

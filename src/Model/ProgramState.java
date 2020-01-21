@@ -92,7 +92,7 @@ public class ProgramState {
         return currentStatement.execute(this);
 
     }
-    public synchronized int getnewID()
+    public static synchronized int getnewID()
     {
         lastID++;
         return lastID;

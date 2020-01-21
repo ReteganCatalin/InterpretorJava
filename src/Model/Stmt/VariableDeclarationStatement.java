@@ -1,6 +1,7 @@
 package Model.Stmt;
 
 import Exceptions.MyExceptions;
+import Model.Dict.MyDictionary;
 import Model.Dict.MyIDictionary;
 import Model.ProgramState;
 import Model.Type.BoolType;
@@ -8,6 +9,8 @@ import Model.Type.IntType;
 import Model.Type.StringType;
 import Model.Type.Type;
 import Model.Value.*;
+
+import java.util.Map;
 
 public class VariableDeclarationStatement implements IStatement
 {
@@ -29,6 +32,7 @@ public class VariableDeclarationStatement implements IStatement
     @Override
     public MyIDictionary<String,Type> typeCheck(MyIDictionary<String,Type> typeEnv) throws MyExceptions
     {
+
         typeEnv.update(name,typ);
         return typeEnv;
     }

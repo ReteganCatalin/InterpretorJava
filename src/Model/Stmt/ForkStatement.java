@@ -42,7 +42,11 @@ public class ForkStatement implements IStatement {
     }
     @Override
     public  MyIDictionary<String, Type> typeCheck(MyIDictionary<String, Type> typeEnv) throws MyExceptions {
-        forked_statement.typeCheck(typeEnv);
+        MyDictionary<String, Type> newEnv=new MyDictionary<>();
+        for (Map.Entry<String, Type> entry: typeEnv.getValues().entrySet()) {
+            newEnv.update(entry.getKey(), entry.getValue().deepCopy());
+        }
+        forked_statement.typeCheck(newEnv);
         return typeEnv;
     }
 

@@ -1,6 +1,7 @@
 package Model.Stmt;
 
 import Exceptions.MyExceptions;
+import Model.Dict.MyDictionary;
 import Model.Dict.MyIDictionary;
 import Model.Exp.Expression;
 import Model.ProgramState;
@@ -9,6 +10,8 @@ import Model.Type.BoolType;
 import Model.Type.Type;
 import Model.Value.BoolValue;
 import Model.Value.Value;
+
+import java.util.Map;
 
 public class IfStatement implements IStatement {
     Expression expression;
@@ -24,9 +27,14 @@ public class IfStatement implements IStatement {
     @Override
     public  MyIDictionary<String,Type> typeCheck(MyIDictionary<String, Type> typeEnv) throws MyExceptions {
         Type ExpressionType = expression.typeCheck(typeEnv);
+
         if (ExpressionType.equals(new BoolType())) {
-            thenS.typeCheck(typeEnv);
-            elseS.typeCheck(typeEnv);
+            MyDictionary<String, Type> newEnv=new MyDictionary<>();
+            for (Map.Entry<String, Type> entry: typeEnv.getValues().entrySet()) {
+                newEnv.update(entry.getKey(), entry.getValue().deepCopy());
+            }
+            thenS.typeCheck(newEnv);
+            elseS.typeCheck(newEnv);
             return typeEnv;
         }
         else
@@ -45,7 +53,7 @@ public class IfStatement implements IStatement {
         Value Cond= expression.eval(symTbl,heap );
         if(!Cond.getType().equals(new BoolType()))
         {
-            throw new MyExceptions("No a boolean condition");
+            throw new MyExceptions("Not a boolean condition");
         }
         else
         {

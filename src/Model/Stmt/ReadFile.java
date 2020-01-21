@@ -66,7 +66,7 @@ public class ReadFile implements IStatement {
             if(ExpressionType.equals(new StringType()))
                 return typeEnv;
             else
-                throw new MyExceptions("Read ");
+                throw new MyExceptions("Read  from something that isn't a filename");
         }
         else
             throw new MyExceptions("File name not a string ");

@@ -1,0 +1,69 @@
+ProgramState with id: 5
+ExeStack:
+Reference(int) v;
+{new (v,20);{print(HeapReading (v));{Reference(Reference(int)) a;;{new (a,v);{HeapWrite (v,30);print(HeapReading (HeapReading (a))+5)}}}}}
+
+SymbolsTable:
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 5
+ExeStack:
+{new (v,20);{print(HeapReading (v));{Reference(Reference(int)) a;;{new (a,v);{HeapWrite (v,30);print(HeapReading (HeapReading (a))+5)}}}}}
+
+SymbolsTable:
+(v=(0,int))
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 5
+ExeStack:
+new (v,20)
+{print(HeapReading (v));{Reference(Reference(int)) a;;{new (a,v);{HeapWrite (v,30);print(HeapReading (HeapReading (a))+5)}}}}
+
+SymbolsTable:
+(v=(0,int))
+
+Out:
+
+FileTable:
+
+Heap:
+
+ProgramState with id: 5
+ExeStack:
+{print(HeapReading (v));{Reference(Reference(int)) a;;{new (a,v);{HeapWrite (v,30);print(HeapReading (HeapReading (a))+5)}}}}
+
+SymbolsTable:
+(v=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->20)
+
+ProgramState with id: 5
+ExeStack:
+print(HeapReading (v))
+{Reference(Reference(int)) a;;{new (a,v);{HeapWrite (v,30);print(HeapReading (HeapReading (a))+5)}}}
+
+SymbolsTable:
+(v=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->20)
+

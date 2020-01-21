@@ -20,14 +20,18 @@ public class HeapAllocation implements IStatement {
     {
         Type typevar = typeEnv.lookup(variable_name);
         Type typexp = expression.typeCheck(typeEnv);
-        if (typevar.equals(new ReferenceType(typexp)))
-            return typeEnv;
+        if(typevar instanceof ReferenceType) {
+            if (typevar.equals(new ReferenceType(typexp)))
+                return typeEnv;
+            else
+                throw new MyExceptions("HeapAllocation: right hand side and left hand side have different types ");
+        }
         else
-            throw new MyExceptions("Assignment: right hand side and left hand side have different types ");
+            throw new MyExceptions("HeapAllocation: variable type not a reference type");
     }
 
     @Override
-    public ProgramState execute(ProgramState state) throws MyExceptions{
+    public synchronized ProgramState execute(ProgramState state) throws MyExceptions{
         MyIDictionary<String, Value> symbolTabel = state.getSymbolsTable();
         MyIDictionary<Integer, Value> Heap = state.getHeapTable();
         if (symbolTabel.isDefined(variable_name)) {

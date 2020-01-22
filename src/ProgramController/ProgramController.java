@@ -86,7 +86,7 @@ public class ProgramController {
 
     public void oneStep() throws MyExceptions
     {
-        executor = Executors.newFixedThreadPool(2);
+        executor = Executors.newFixedThreadPool(3);
         List<ProgramState> list = removeCompletedPrograms(repo.getProgramList());
         if (!list.isEmpty()) {
             callGarbageCollector();

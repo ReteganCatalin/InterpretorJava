@@ -1,4 +1,4 @@
-ProgramState with id: 6
+ProgramState with id: 1
 ExeStack:
 bool b;
 {int c;;{b=true;{IF(b) THEN(c=100)ELSE(c=200);{print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}}}}
@@ -11,7 +11,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 6
+ProgramState with id: 1
 ExeStack:
 {int c;;{b=true;{IF(b) THEN(c=100)ELSE(c=200);{print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}}}}
 
@@ -24,7 +24,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 6
+ProgramState with id: 1
 ExeStack:
 int c;
 {b=true;{IF(b) THEN(c=100)ELSE(c=200);{print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}}}
@@ -38,7 +38,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 6
+ProgramState with id: 1
 ExeStack:
 {b=true;{IF(b) THEN(c=100)ELSE(c=200);{print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}}}
 
@@ -52,7 +52,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 6
+ProgramState with id: 1
 ExeStack:
 b=true
 {IF(b) THEN(c=100)ELSE(c=200);{print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}}
@@ -67,7 +67,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 6
+ProgramState with id: 1
 ExeStack:
 {IF(b) THEN(c=100)ELSE(c=200);{print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}}
 
@@ -81,7 +81,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 6
+ProgramState with id: 1
 ExeStack:
 IF(b) THEN(c=100)ELSE(c=200)
 {print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}
@@ -96,7 +96,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 6
+ProgramState with id: 1
 ExeStack:
 {print(c);{IF(false) THEN(c=100)ELSE(c=200);print(c)}}
 
@@ -110,7 +110,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 6
+ProgramState with id: 1
 ExeStack:
 print(c)
 {IF(false) THEN(c=100)ELSE(c=200);print(c)}
@@ -125,7 +125,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 6
+ProgramState with id: 1
 ExeStack:
 {IF(false) THEN(c=100)ELSE(c=200);print(c)}
 
@@ -140,7 +140,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 6
+ProgramState with id: 1
 ExeStack:
 IF(false) THEN(c=100)ELSE(c=200)
 print(c)
@@ -156,7 +156,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 6
+ProgramState with id: 1
 ExeStack:
 print(c)
 
@@ -171,7 +171,7 @@ FileTable:
 
 Heap:
 
-ProgramState with id: 6
+ProgramState with id: 1
 ExeStack:
 
 SymbolsTable:

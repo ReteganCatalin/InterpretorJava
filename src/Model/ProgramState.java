@@ -8,8 +8,10 @@ import Model.Stack.MyIStack;
 import Model.Stack.MyStack;
 import Model.Stmt.IStatement;
 import Model.Value.Value;
+import javafx.util.Pair;
 
 import java.io.BufferedReader;
+import java.util.Vector;
 
 public class ProgramState {
     private MyIStack<IStatement> statements;
@@ -17,6 +19,16 @@ public class ProgramState {
     private MyIList<Value> out;
     private MyIDictionary<String, BufferedReader> fileTable;
     private MyIHeap<Value>  HeapTable;
+    private MyISemaphore<Pair<Integer, Vector<Integer>>> SemaphoreTabel;
+
+    public void setSemaphoreTabel(MyISemaphore<Pair<Integer, Vector<Integer>>> semaphoreTabel) {
+        SemaphoreTabel = semaphoreTabel;
+    }
+
+    public MyISemaphore<Pair<Integer, Vector<Integer>>> getSemaphoreTabel() {
+        return SemaphoreTabel;
+    }
+
     private IStatement originalProgram;
     private int identificator;
     private static int lastID;
@@ -45,6 +57,7 @@ public class ProgramState {
         this.out = new MyList<Value>();
         this.fileTable=new FileTable<String,BufferedReader>();
         this.HeapTable=new Heap<Value>();
+        this.SemaphoreTabel=new SemaphoreTable<>();
         originalProgram=statement;
         statements.push(statement);
         identificator=getnewID();
@@ -102,7 +115,9 @@ public class ProgramState {
                 "SymbolsTable:\n" + symbolsTable + "\n" +
                 "Out:\n" + out +"\n"+
                 "FileTable:\n" + fileTable +"\n"+
-                "Heap:\n" + HeapTable +"\n";
+                "Heap:\n" + HeapTable +
+                "Semaphore Tabel:\n"+ SemaphoreTabel+
+                "\n";
     }
 
     public ProgramState GetCurrentState()

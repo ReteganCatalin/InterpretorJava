@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane maxHeight="515.0" maxWidth="821.0" minHeight="467.0" minWidth="681.0" prefHeight="467.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.RunFormController">
+<AnchorPane maxHeight="584.0" maxWidth="821.0" minHeight="467.0" minWidth="681.0" prefHeight="584.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.RunFormController">
     <children>
         <Label layoutX="70.0" layoutY="23.0" text="Heap Table" />
         <Label layoutX="253.0" layoutY="14.0" text="Output" />
@@ -40,5 +40,12 @@
          </children>
       </HBox>
         <ListView fx:id="executionStackListView" layoutX="14.0" layoutY="246.0" prefHeight="84.0" prefWidth="720.0" />
+      <Label layoutX="334.0" layoutY="464.0" text="SemaphoreTable" />
+      <TableView fx:id="semaphoreTableView" layoutX="24.0" layoutY="484.0" prefHeight="84.0" prefWidth="694.0">
+        <columns>
+          <TableColumn fx:id="semaphoreAddress" prefWidth="150.39998817443848" text="semaphoreAddress" />
+          <TableColumn fx:id="semaphoreListofThreads" minWidth="0.0" prefWidth="543.1999816894531" text="SemaphoreListofThreads" />
+        </columns>
+      </TableView>
     </children>
 </AnchorPane>

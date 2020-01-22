@@ -12,10 +12,12 @@ import Model.Stmt.*;
 import Model.Type.*;
 import Model.Value.BoolValue;
 import Model.Value.IntValue;
+import Model.Value.ReferenceValue;
 import Model.Value.StringValue;
 import ProgramController.ProgramController;
 import Repository.ProgramRepo;
 import Repository.Repository;
+import com.sun.org.apache.xpath.internal.operations.Variable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -107,14 +109,63 @@ public class SelectFormController implements Initializable {
                                                                 new PrintStatement(new HeapReading(new VariableExpression("a"))))))),
                                                 new CompoundStatement(new AssignmentStatement("v",new ValueExpression(new IntValue(37))) ,new CompoundStatement(new PrintStatement(new VariableExpression("v")),
                                                         new PrintStatement(new HeapReading(new VariableExpression("a"))))))))));
-        IStatement ex9 = new CompoundStatement(new VariableDeclarationStatement("b", new BoolType()),
-                new CompoundStatement(new VariableDeclarationStatement("c", new IntType()),
-                        new CompoundStatement(new AssignmentStatement("b", new ValueExpression(new BoolValue(true))),
-                                new CompoundStatement(new ConditionalAssigment(new VariableExpression("b"),"c", new ValueExpression(new IntValue(100)),new ValueExpression(new IntValue(200))),
-                                        new CompoundStatement(new PrintStatement(new VariableExpression("c")),
-                                                new CompoundStatement(new ConditionalAssigment(new ValueExpression(new BoolValue(false)),"c", new ValueExpression(new IntValue(100)),new ValueExpression(new IntValue(200))),
-                                                        new PrintStatement(new VariableExpression("c"))))))));
-        programStatements = new ArrayList<>(Arrays.asList(ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8,ex9));}
+        IStatement ex9 = new CompoundStatement(new VariableDeclarationStatement("b",new IntType()),
+                new CompoundStatement(new VariableDeclarationStatement("a",new BoolType()),
+                        new CompoundStatement(new VariableDeclarationStatement("c",new IntType()),
+                                new CompoundStatement(new AssignmentStatement("b",new ValueExpression(new IntValue(1))),
+                                        new CompoundStatement(new AssignmentStatement("a",new ValueExpression(new BoolValue(true))),
+                                                new CompoundStatement(new AssignmentStatement("c",new ValueExpression(new IntValue(5))),
+                                                        new CompoundStatement(new SwitchStatement(new ArithmeticExpression(3,new VariableExpression("a"),new ValueExpression(new IntValue(10))),
+                                                                new ArithmeticExpression(3,new VariableExpression("b"),new VariableExpression("c") ),new ValueExpression(new IntValue(10)),
+                                                                new CompoundStatement(new PrintStatement(new VariableExpression("a")),new PrintStatement(new VariableExpression("b"))),
+                                                                new CompoundStatement(new PrintStatement(new ValueExpression(new IntValue(100))),new PrintStatement(new ValueExpression(new IntValue(200))))
+                                                                ,new PrintStatement(new ValueExpression(new IntValue(300)))),
+                                                                new PrintStatement(new ValueExpression(new IntValue(300))))))))));
+        IStatement ex10=new CompoundStatement(new VariableDeclarationStatement("a",new IntType()),
+                new CompoundStatement(new VariableDeclarationStatement("b",new IntType()),
+                new CompoundStatement(new VariableDeclarationStatement("c",new IntType()),
+                new CompoundStatement(new AssignmentStatement("a",new ValueExpression(new IntValue(1))),
+                        new CompoundStatement(new AssignmentStatement("b",new ValueExpression(new IntValue(2))),
+                        new CompoundStatement(new AssignmentStatement("c",new ValueExpression(new IntValue(5))),
+                                new CompoundStatement(new SwitchStatement(new ArithmeticExpression(3,new VariableExpression("a"),new ValueExpression(new IntValue(10))),
+                                        new ArithmeticExpression(3,new VariableExpression("b"),new VariableExpression("c") ),new ValueExpression(new IntValue(10)),
+                                        new CompoundStatement(new PrintStatement(new VariableExpression("a")),new PrintStatement(new VariableExpression("b"))),
+                                        new CompoundStatement(new PrintStatement(new ValueExpression(new IntValue(100))),new PrintStatement(new ValueExpression(new IntValue(200))))
+                                        ,new PrintStatement(new ValueExpression(new IntValue(300)))),
+                                        new PrintStatement(new ValueExpression(new IntValue(300))))
+                        ))))));
+
+        IStatement fork1=new ForkStatement(new CompoundStatement(new Acquire("cnt"),
+                new CompoundStatement(new  HeapWrite("v1",new ArithmeticExpression(3,new HeapReading(new VariableExpression("v1")),new ValueExpression(new IntValue(10)))),
+                        new CompoundStatement(new PrintStatement(new HeapReading(new VariableExpression("v1"))),
+                        new Release("cnt")))));
+
+        IStatement fork2=new ForkStatement(new CompoundStatement(new Acquire("cnt"),
+                new CompoundStatement(new  HeapWrite("v1",new ArithmeticExpression(3,new HeapReading(new VariableExpression("v1")),new ValueExpression(new IntValue(10))))
+                        ,new CompoundStatement(new HeapWrite("v1",new ArithmeticExpression(3,new HeapReading(new VariableExpression("v1")),new ValueExpression(new IntValue(2)))) ,new CompoundStatement(new PrintStatement(new HeapReading(new VariableExpression("v1"))),
+                        new Release("cnt"))))));
+
+
+        IStatement ex11=new CompoundStatement(new VariableDeclarationStatement("v1",new ReferenceType(new IntType())),
+                new CompoundStatement(new VariableDeclarationStatement("cnt",new IntType()),
+                        new CompoundStatement(new HeapAllocation("v1",new ValueExpression(new IntValue(1))),
+                                new CompoundStatement(new createSemaphore("cnt",new HeapReading(new VariableExpression("v1"))),
+                                        new CompoundStatement(fork1,
+                                                new CompoundStatement(fork2,
+                                                        new CompoundStatement(new Acquire("cnt"),
+                                                                new CompoundStatement(new PrintStatement(new ArithmeticExpression(2,new HeapReading(new  VariableExpression("v1")),new ValueExpression(new IntValue(1)))),
+                                                                        new Release("cnt")))))))));
+        IStatement ex12=new CompoundStatement(new VariableDeclarationStatement("v1",new ReferenceType(new IntType())),
+                new CompoundStatement(new VariableDeclarationStatement("cnt",new IntType()),
+                        new CompoundStatement(new HeapAllocation("v1",new ValueExpression(new IntValue(1))),
+                                new CompoundStatement(new createSemaphore("cnt",new HeapReading(new VariableExpression("v1"))),
+                                        new CompoundStatement(fork1,
+                                                new CompoundStatement(fork2,
+                                                        new CompoundStatement(new Acquire("cnt"),
+                                                                new CompoundStatement(new PrintStatement(new ArithmeticExpression(2,new HeapReading(new  VariableExpression("v1")),new ValueExpression(new IntValue(1)))),
+                                                                        new Release("v1")))))))));
+
+        programStatements = new ArrayList<>(Arrays.asList(ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8,ex9,ex10,ex11,ex12));}
 
     private List<String> getStringRepresentations(){
         return programStatements.stream().map(Object::toString).collect(Collectors.toList());

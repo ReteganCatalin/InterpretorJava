@@ -1,0 +1,312 @@
+ProgramState with id: 2
+ExeStack:
+int a;
+{int b;;{int c;;{a=1;{b=2;{c=5;{Switch(a*10) (case a*10==b*c: {print(a);print(b)}) (case a*10==10:{print(100);print(200)}))defaultprint(300));print(300)}}}}}}
+
+SymbolsTable:
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+{int b;;{int c;;{a=1;{b=2;{c=5;{Switch(a*10) (case a*10==b*c: {print(a);print(b)}) (case a*10==10:{print(100);print(200)}))defaultprint(300));print(300)}}}}}}
+
+SymbolsTable:
+(a=0)
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+int b;
+{int c;;{a=1;{b=2;{c=5;{Switch(a*10) (case a*10==b*c: {print(a);print(b)}) (case a*10==10:{print(100);print(200)}))defaultprint(300));print(300)}}}}}
+
+SymbolsTable:
+(a=0)
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+{int c;;{a=1;{b=2;{c=5;{Switch(a*10) (case a*10==b*c: {print(a);print(b)}) (case a*10==10:{print(100);print(200)}))defaultprint(300));print(300)}}}}}
+
+SymbolsTable:
+(a=0)
+(b=0)
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+int c;
+{a=1;{b=2;{c=5;{Switch(a*10) (case a*10==b*c: {print(a);print(b)}) (case a*10==10:{print(100);print(200)}))defaultprint(300));print(300)}}}}
+
+SymbolsTable:
+(a=0)
+(b=0)
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+{a=1;{b=2;{c=5;{Switch(a*10) (case a*10==b*c: {print(a);print(b)}) (case a*10==10:{print(100);print(200)}))defaultprint(300));print(300)}}}}
+
+SymbolsTable:
+(a=0)
+(b=0)
+(c=0)
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+a=1
+{b=2;{c=5;{Switch(a*10) (case a*10==b*c: {print(a);print(b)}) (case a*10==10:{print(100);print(200)}))defaultprint(300));print(300)}}}
+
+SymbolsTable:
+(a=0)
+(b=0)
+(c=0)
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+{b=2;{c=5;{Switch(a*10) (case a*10==b*c: {print(a);print(b)}) (case a*10==10:{print(100);print(200)}))defaultprint(300));print(300)}}}
+
+SymbolsTable:
+(a=1)
+(b=0)
+(c=0)
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+b=2
+{c=5;{Switch(a*10) (case a*10==b*c: {print(a);print(b)}) (case a*10==10:{print(100);print(200)}))defaultprint(300));print(300)}}
+
+SymbolsTable:
+(a=1)
+(b=0)
+(c=0)
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+{c=5;{Switch(a*10) (case a*10==b*c: {print(a);print(b)}) (case a*10==10:{print(100);print(200)}))defaultprint(300));print(300)}}
+
+SymbolsTable:
+(a=1)
+(b=2)
+(c=0)
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+c=5
+{Switch(a*10) (case a*10==b*c: {print(a);print(b)}) (case a*10==10:{print(100);print(200)}))defaultprint(300));print(300)}
+
+SymbolsTable:
+(a=1)
+(b=2)
+(c=0)
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+{Switch(a*10) (case a*10==b*c: {print(a);print(b)}) (case a*10==10:{print(100);print(200)}))defaultprint(300));print(300)}
+
+SymbolsTable:
+(a=1)
+(b=2)
+(c=5)
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+Switch(a*10) (case a*10==b*c: {print(a);print(b)}) (case a*10==10:{print(100);print(200)}))defaultprint(300))
+print(300)
+
+SymbolsTable:
+(a=1)
+(b=2)
+(c=5)
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+IF(a*10==b*c) THEN({print(a);print(b)})ELSE(IF(a*10==10) THEN({print(100);print(200)})ELSE(print(300)))
+print(300)
+
+SymbolsTable:
+(a=1)
+(b=2)
+(c=5)
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+{print(a);print(b)}
+print(300)
+
+SymbolsTable:
+(a=1)
+(b=2)
+(c=5)
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+print(a)
+print(b)
+print(300)
+
+SymbolsTable:
+(a=1)
+(b=2)
+(c=5)
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+print(b)
+print(300)
+
+SymbolsTable:
+(a=1)
+(b=2)
+(c=5)
+
+Out:
+1
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+print(300)
+
+SymbolsTable:
+(a=1)
+(b=2)
+(c=5)
+
+Out:
+1
+2
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 2
+ExeStack:
+
+SymbolsTable:
+(a=1)
+(b=2)
+(c=5)
+
+Out:
+1
+2
+300
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+

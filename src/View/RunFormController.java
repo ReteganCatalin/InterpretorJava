@@ -3,6 +3,7 @@ package View;
 import Exceptions.MyExceptions;
 import Model.Dict.MyIDictionary;
 import Model.Dict.MyIHeap;
+import Model.Dict.MyISemaphore;
 import Model.ProgramState;
 import Model.Stack.MyIStack;
 import Model.Stmt.IStatement;
@@ -16,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.util.Pair;
 
 import java.io.BufferedReader;
 import java.net.URL;
@@ -33,6 +35,15 @@ public class RunFormController implements Initializable {
 
     @FXML
     private TableColumn<Map.Entry<Integer, Value>, Value> heapValueColumn;
+
+    @FXML
+    private TableView<Map.Entry<Integer, Pair<Integer,Vector<Integer>>>> semaphoreTableView;
+
+    @FXML
+    private TableColumn<Map.Entry<Integer, Pair<Integer,Vector<Integer>>>, Integer> semaphoreAddress;
+
+    @FXML
+    private TableColumn<Map.Entry<Integer, Pair<Integer,Vector<Integer>>>, Vector<Integer>> semaphoreListOfThreads;
 
     @FXML
     private ListView<String> fileListView;
@@ -73,6 +84,9 @@ public class RunFormController implements Initializable {
 
         symbolTableVariableColumn.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getKey() + ""));
         symbolTableValueColumn.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getValue()));
+
+        semaphoreAddress.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getValue().getKey()).asObject());
+        semaphoreListOfThreads.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getValue().getValue()));
 
         programStateListView.setOnMouseClicked(mouseEvent -> changeProgramState(getCurrentProgramState()));
 
@@ -133,7 +147,17 @@ public class RunFormController implements Initializable {
                 populateOutput(currentProgramState);
                 populateFileTable(currentProgramState);
                 populateHeapTable(currentProgramState);
+                populateSemaphoreTable(currentProgramState);
         }
+    }
+
+    private void populateSemaphoreTable(ProgramState currentProgramState) {
+        MyISemaphore<Pair<Integer,Vector<Integer>>> semaphoreTable = currentProgramState.getSemaphoreTabel();
+
+        List<Map.Entry<Integer, Pair<Integer,Vector<Integer>>>> semaphoreTableS = new ArrayList<>(semaphoreTable.getValues().entrySet());
+
+        semaphoreTableView.setItems(FXCollections.observableList(semaphoreTableS));
+        semaphoreTableView.refresh();
     }
 
     private void populateHeapTable(ProgramState currentProgramState) {

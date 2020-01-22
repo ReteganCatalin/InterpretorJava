@@ -1,0 +1,823 @@
+ProgramState with id: 4
+ExeStack:
+Reference(int) v1;
+{int cnt;;{new (v1,1);{CreateSemaphore(cnt,HeapReading (v1));{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{print(HeapReading (v1));Release(cnt)}}});{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}});{Acquire(cnt);{print(HeapReading (v1)-1);Release(cnt)}}}}}}}
+
+SymbolsTable:
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 4
+ExeStack:
+{int cnt;;{new (v1,1);{CreateSemaphore(cnt,HeapReading (v1));{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{print(HeapReading (v1));Release(cnt)}}});{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}});{Acquire(cnt);{print(HeapReading (v1)-1);Release(cnt)}}}}}}}
+
+SymbolsTable:
+(v1=(0,int))
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 4
+ExeStack:
+int cnt;
+{new (v1,1);{CreateSemaphore(cnt,HeapReading (v1));{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{print(HeapReading (v1));Release(cnt)}}});{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}});{Acquire(cnt);{print(HeapReading (v1)-1);Release(cnt)}}}}}}
+
+SymbolsTable:
+(v1=(0,int))
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 4
+ExeStack:
+{new (v1,1);{CreateSemaphore(cnt,HeapReading (v1));{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{print(HeapReading (v1));Release(cnt)}}});{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}});{Acquire(cnt);{print(HeapReading (v1)-1);Release(cnt)}}}}}}
+
+SymbolsTable:
+(cnt=0)
+(v1=(0,int))
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 4
+ExeStack:
+new (v1,1)
+{CreateSemaphore(cnt,HeapReading (v1));{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{print(HeapReading (v1));Release(cnt)}}});{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}});{Acquire(cnt);{print(HeapReading (v1)-1);Release(cnt)}}}}}
+
+SymbolsTable:
+(cnt=0)
+(v1=(0,int))
+
+Out:
+
+FileTable:
+
+Heap:
+Semaphore Tabel:
+
+ProgramState with id: 4
+ExeStack:
+{CreateSemaphore(cnt,HeapReading (v1));{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{print(HeapReading (v1));Release(cnt)}}});{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}});{Acquire(cnt);{print(HeapReading (v1)-1);Release(cnt)}}}}}
+
+SymbolsTable:
+(cnt=0)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->1)
+Semaphore Tabel:
+
+ProgramState with id: 4
+ExeStack:
+CreateSemaphore(cnt,HeapReading (v1))
+{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{print(HeapReading (v1));Release(cnt)}}});{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}});{Acquire(cnt);{print(HeapReading (v1)-1);Release(cnt)}}}}
+
+SymbolsTable:
+(cnt=0)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->1)
+Semaphore Tabel:
+
+ProgramState with id: 4
+ExeStack:
+{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{print(HeapReading (v1));Release(cnt)}}});{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}});{Acquire(cnt);{print(HeapReading (v1)-1);Release(cnt)}}}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->1)
+Semaphore Tabel:
+(1->1=[])
+
+ProgramState with id: 4
+ExeStack:
+fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{print(HeapReading (v1));Release(cnt)}}})
+{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}});{Acquire(cnt);{print(HeapReading (v1)-1);Release(cnt)}}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->1)
+Semaphore Tabel:
+(1->1=[])
+
+ProgramState with id: 4
+ExeStack:
+{fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}});{Acquire(cnt);{print(HeapReading (v1)-1);Release(cnt)}}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->1)
+Semaphore Tabel:
+(1->1=[])
+
+ProgramState with id: 5
+ExeStack:
+{Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{print(HeapReading (v1));Release(cnt)}}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->1)
+Semaphore Tabel:
+(1->1=[])
+
+ProgramState with id: 4
+ExeStack:
+fork({Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}})
+{Acquire(cnt);{print(HeapReading (v1)-1);Release(cnt)}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->1)
+Semaphore Tabel:
+(1->1=[])
+
+ProgramState with id: 5
+ExeStack:
+Acquire(cnt)
+{HeapWrite (v1,HeapReading (v1)*10);{print(HeapReading (v1));Release(cnt)}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->1)
+Semaphore Tabel:
+(1->1=[])
+
+ProgramState with id: 4
+ExeStack:
+{Acquire(cnt);{print(HeapReading (v1)-1);Release(cnt)}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->1)
+Semaphore Tabel:
+(1->1=[5])
+
+ProgramState with id: 5
+ExeStack:
+{HeapWrite (v1,HeapReading (v1)*10);{print(HeapReading (v1));Release(cnt)}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->1)
+Semaphore Tabel:
+(1->1=[5])
+
+ProgramState with id: 6
+ExeStack:
+{Acquire(cnt);{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->1)
+Semaphore Tabel:
+(1->1=[5])
+
+ProgramState with id: 4
+ExeStack:
+Acquire(cnt)
+{print(HeapReading (v1)-1);Release(cnt)}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->1)
+Semaphore Tabel:
+(1->1=[5])
+
+ProgramState with id: 5
+ExeStack:
+HeapWrite (v1,HeapReading (v1)*10)
+{print(HeapReading (v1));Release(cnt)}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->1)
+Semaphore Tabel:
+(1->1=[5])
+
+ProgramState with id: 6
+ExeStack:
+Acquire(cnt)
+{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->1)
+Semaphore Tabel:
+(1->1=[5])
+
+ProgramState with id: 4
+ExeStack:
+Acquire(cnt)
+{print(HeapReading (v1)-1);Release(cnt)}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[5])
+
+ProgramState with id: 5
+ExeStack:
+{print(HeapReading (v1));Release(cnt)}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[5])
+
+ProgramState with id: 6
+ExeStack:
+Acquire(cnt)
+{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[5])
+
+ProgramState with id: 4
+ExeStack:
+Acquire(cnt)
+{print(HeapReading (v1)-1);Release(cnt)}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[5])
+
+ProgramState with id: 5
+ExeStack:
+print(HeapReading (v1))
+Release(cnt)
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[5])
+
+ProgramState with id: 6
+ExeStack:
+Acquire(cnt)
+{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[5])
+
+ProgramState with id: 4
+ExeStack:
+Acquire(cnt)
+{print(HeapReading (v1)-1);Release(cnt)}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[5])
+
+ProgramState with id: 5
+ExeStack:
+Release(cnt)
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[5])
+
+ProgramState with id: 6
+ExeStack:
+Acquire(cnt)
+{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[5])
+
+ProgramState with id: 4
+ExeStack:
+Acquire(cnt)
+{print(HeapReading (v1)-1);Release(cnt)}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[])
+
+ProgramState with id: 5
+ExeStack:
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[])
+
+ProgramState with id: 6
+ExeStack:
+Acquire(cnt)
+{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[])
+
+ProgramState with id: 4
+ExeStack:
+{print(HeapReading (v1)-1);Release(cnt)}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[4])
+
+ProgramState with id: 6
+ExeStack:
+Acquire(cnt)
+{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[4])
+
+ProgramState with id: 4
+ExeStack:
+print(HeapReading (v1)-1)
+Release(cnt)
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[4])
+
+ProgramState with id: 6
+ExeStack:
+Acquire(cnt)
+{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[4])
+
+ProgramState with id: 4
+ExeStack:
+Release(cnt)
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+9
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[4])
+
+ProgramState with id: 6
+ExeStack:
+Acquire(cnt)
+{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+9
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[4])
+
+ProgramState with id: 4
+ExeStack:
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+9
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[6])
+
+ProgramState with id: 6
+ExeStack:
+{HeapWrite (v1,HeapReading (v1)*10);{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+9
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[6])
+
+ProgramState with id: 6
+ExeStack:
+HeapWrite (v1,HeapReading (v1)*10)
+{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+9
+
+FileTable:
+
+Heap:
+(1->10)
+Semaphore Tabel:
+(1->1=[6])
+
+ProgramState with id: 6
+ExeStack:
+{HeapWrite (v1,HeapReading (v1)*2);{print(HeapReading (v1));Release(cnt)}}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+9
+
+FileTable:
+
+Heap:
+(1->100)
+Semaphore Tabel:
+(1->1=[6])
+
+ProgramState with id: 6
+ExeStack:
+HeapWrite (v1,HeapReading (v1)*2)
+{print(HeapReading (v1));Release(cnt)}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+9
+
+FileTable:
+
+Heap:
+(1->100)
+Semaphore Tabel:
+(1->1=[6])
+
+ProgramState with id: 6
+ExeStack:
+{print(HeapReading (v1));Release(cnt)}
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+9
+
+FileTable:
+
+Heap:
+(1->200)
+Semaphore Tabel:
+(1->1=[6])
+
+ProgramState with id: 6
+ExeStack:
+print(HeapReading (v1))
+Release(cnt)
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+9
+
+FileTable:
+
+Heap:
+(1->200)
+Semaphore Tabel:
+(1->1=[6])
+
+ProgramState with id: 6
+ExeStack:
+Release(cnt)
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+9
+200
+
+FileTable:
+
+Heap:
+(1->200)
+Semaphore Tabel:
+(1->1=[6])
+
+ProgramState with id: 6
+ExeStack:
+
+SymbolsTable:
+(cnt=1)
+(v1=(1,int))
+
+Out:
+10
+9
+200
+
+FileTable:
+
+Heap:
+(1->200)
+Semaphore Tabel:
+(1->1=[])
+
